@@ -111,7 +111,7 @@ public class Progressive_BeckerRopertz{
             profile_matrix[i][0] = profile_matrix[i-1][0] - residues(columns(p.rows())[i-1])* q.rows().size() * d;
         }
 
-        for(int j = 1; j <= length_p + 1; j++){
+        for(int j = 1; j <= length_q; j++){
             profile_matrix[0][j] = profile_matrix[0][j-1] - residues(columns(q.rows())[j-1])* p.rows().size() * d;
         }
 
@@ -120,8 +120,8 @@ public class Progressive_BeckerRopertz{
             for(int j = 1; j <= length_q; j++){
 
                 int diag_score = profile_matrix[i-1][j-1] + crossScore(columns(p.rows())[i-1],columns(q.rows())[j-1],matrix, d);
-                int top_score = profile_matrix[i-1][j] - residues(columns(p.rows())[j-1]) * q.rows().size() * d;
-                int left_score = profile_matrix[i][j-1] - residues(columns(q.rows())[i-1]) * p.rows().size() * d;
+                int top_score = profile_matrix[i-1][j] - residues(columns(p.rows())[i-1]) * q.rows().size() * d;
+                int left_score = profile_matrix[i][j-1] - residues(columns(q.rows())[j-1]) * p.rows().size() * d;
 
                 profile_matrix[i][j] = Math.max(diag_score, Math.max(left_score, top_score));
 
@@ -142,7 +142,7 @@ public class Progressive_BeckerRopertz{
 
         while(i > 0 || j > 0){
 
-                if(i > 0 && j > 0 && profile_matrix[i-1][j-1] == profile_matrix[i][j] - crossScore(columns(p.rows())[i-1],columns(q.rows())[j-1],matrix, d)){
+                if(i > 0 && j > 0 && profile_matrix[i][j] == profile_matrix[i-1][j-1] + crossScore(columns(p.rows())[i-1],columns(q.rows())[j-1],matrix, d)){
                     for(int n = 0; n < p.rows().size(); n++){
                         newP.get(n).append((columns(p.rows())[i-1]).charAt(n));
                     }
@@ -151,7 +151,7 @@ public class Progressive_BeckerRopertz{
                     }
                     i--;
                     j--;
-                }else if(i>0 && profile_matrix[i][j] == profile_matrix[i-1][j] - residues(columns(p.rows())[j-1]) * q.rows().size() * d){
+                }else if(i>0 && profile_matrix[i][j] == profile_matrix[i-1][j] - residues(columns(p.rows())[i-1]) * q.rows().size() * d){
                     for(int n = 0; n < p.rows().size(); n++){
                         newP.get(n).append((columns(p.rows())[i-1]).charAt(n));
                     }

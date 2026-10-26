@@ -75,8 +75,7 @@ PIN1_HUMAN     KLPPGWEKRMGRVYYFNWERPSG
 SP score: 4373   (sum of the merge scores: 4373)
 ```
 
-
-
+d)
 
 
 

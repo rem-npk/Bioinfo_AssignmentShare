@@ -1,6 +1,0 @@
-# Match +1, mismatch -1, as in Exercises 2.4 and 2.13 of the handout.
-   A  C  G  T
-A  1 -1 -1 -1
-C -1  1 -1 -1
-G -1 -1  1 -1
-T -1 -1 -1  1

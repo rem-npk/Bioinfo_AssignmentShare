@@ -165,7 +165,39 @@ This is countered by turning the edge weights into sequence weights and with tha
 
 
 **4 Three sequences by dynamic programming**
+a)
+computing a score of the displayed alignment
+scoring with blosum62
+residue against a gap -4
+two gaps 0
 
+$$
+\begin{array}{l|ccccccc|l} & A & - & G & D & - & E & - \\ 
+& A & S & G & -& - & E & - \\ 
+& A & - & - & D & S & E & E \\ \hline 
+\text{score} & 12 & -8 & -2 & -2 & -8 & 15 & -8 & -1\end{array}
+$$
+b)
+$$
+\begin{array}{l|ccccc|l} & A & G & - & D & E \\ 
+& A & S & - &G & E \\ 
+& A  & D & S & E & E \\ \hline 
+\text{score} & 12 & -1 & -8 & -1  &  15 & 17\end{array}
+$$
+c)
+$$
+\begin{array}{l|ccccc|l} & A & - & G & D & E \\ 
+& A & - & S &G & E \\ 
+& A  & D & S & E & E \\ \hline 
+\text{score} & 12 & -8 & 4 & -1  &  15 & 22\end{array}
+$$
+
+d)
+The three-dimensional matrix for these three sequences have at least $(5+1)*(4+1)*(4+1) = 150$ cells.
+An interior cells has $2^3 -1 = 7$ predecessors.
+For ten sequences of length 100 there would be $101^10 = 1.1 * 10^{20}$ cells and $2^{10} -1 = 1023$ predecessors.
+
+Because of this exponential growth a heuristic is used practice instead of the exact alignment. 
 
 **5 Profile alignment by hand**
 

@@ -162,4 +162,30 @@ With that, early decisions on gap placements are never reconsidered and the fina
 The sum-of-pairs score also treats every pair equally. So closely related sequences dominate the scoring, the scaling defect. 
 This is countered by turning the edge weights into sequence weights and with that down-weighing closely related sequences, which results in a weighted rather than a plain sp-score.
 
+**3 The sum-of-pairs score**
+
+
+**4 Three sequences by dynamic programming**
+
+
+**5 Profile alignment by hand**
+
+Exercise 2.5:
+
+two identical residues +1
+two different residues -1
+residue against gap -1
+gap against gap 0
+$$
+\begin{array}{|c|c|c|c|}
+\hline
+ F & 0 & AA & C- & TC \\ \hline
+0 & 0 & -4 & -6 & -10\\ \hline
+AA & -4 & 4 & 2 & -2\\ \hline
+A- & -6 & 2 & 1 & -2\\ \hline
+CG & -10 & -2 & 0 & -1 \\ \hline
+\end{array}   
+$$
+b)
+
 

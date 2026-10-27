@@ -157,8 +157,7 @@ sp-score own alignment: 4373
 Under the sum-of-pairs objective our own alignment scores highest with 4373.
 The sp-score is only a model, it depends on the chosen matrix and gap penalty. 
 It does not take the actual structure into account, which is illustrated by our own alignment having the highest sp-score despite fewer than 50% of ClustalW's 23 columns are reproduced. 
-Two features make the tools depart from this objective. By using distances along a guide tree (e.g. by Neighbor-Joining), the most similar sequences are aligned first and then the rest is merged one after the other. 
-With that, early decisions on gap placements are never reconsidered and the final alignment is not an optimization of the sum-of-pairs score, which means a higher scoring alignment can exist.
+Two features make the tools depart from this objective. By using distances along a guide tree (e.g. by Neighbor-Joining), the most similar sequences are aligned first and then the rest is merged one after the other. With that, early decisions on gap placements are never reconsidered and the final alignment is not an optimization of the sum-of-pairs score, which means a higher scoring alignment can exist.
 The sum-of-pairs score also treats every pair equally. So closely related sequences dominate the scoring, the scaling defect. 
 This is countered by turning the edge weights into sequence weights and with that down-weighing closely related sequences, which results in a weighted rather than a plain sp-score.
 
@@ -172,6 +171,7 @@ This is countered by turning the edge weights into sequence weights and with tha
 
 Exercise 2.5:
 
+a)
 two identical residues +1
 two different residues -1
 residue against gap -1
@@ -180,12 +180,14 @@ $$
 \begin{array}{|c|c|c|c|}
 \hline
  F & 0 & AA & C- & TC \\ \hline
-0 & 0 & -4 & -6 & -10\\ \hline
-AA & -4 & 4 & 2 & -2\\ \hline
-A- & -6 & 2 & 1 & -2\\ \hline
-CG & -10 & -2 & 0 & -1 \\ \hline
+0 & 0\cellcolor{red} & -4 & -6 & -10\\ \hline
+AA & -4 &\cellcolor{red} 4 & 2 & -2\\ \hline
+A- & -6 & 2 &\cellcolor{red} 1 & -2\\ \hline
+CG & -10 & -2 & 0 & \cellcolor{red} -1 \\ \hline
 \end{array}   
 $$
 b)
-
-
+$$
+\begin{array}{l|ccc} P_1 & A & C & T \\ P_2 & A & - & C \\ \hline Q_1 & A & A & C \\ Q_2 & A & - & G \end{array}
+$$
+The traceback runs along the diagonal of the matrix. There were no two similar scores for a cell from the diagonal, the left score or the top score, which makes the traceback unique. 

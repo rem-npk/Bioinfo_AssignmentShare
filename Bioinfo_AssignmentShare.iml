@@ -5,6 +5,14 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment01" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment02" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment03" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment04" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment05" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment06" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment07" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment08" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment09" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment10" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

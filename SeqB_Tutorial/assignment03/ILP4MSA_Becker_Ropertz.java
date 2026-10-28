@@ -5,16 +5,16 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- * ILP4MSA_YOUR_NAME.java -- writes the maximum-weight-trace problem for three sequences
+ * ILP4MSA_Becker_Ropertz.java -- writes the maximum-weight-trace problem for three sequences
  * (Section 2.6.4 of the handout) as an integer linear program in the input format of
  * lp_solve (Section 2.6.5).
  * Sequence Bioinformatics, WS 2026/27, Assignment 3.
- * Author: YOUR_NAME
+ * Author: Remi Becker
+ *         Nina Ropertz
  *
- * Usage: java ILP4MSA_YOUR_NAME <sequences.fasta> <match> <mismatch>  > problem.lp
+ * Usage: java ILP4MSA_Becker_Ropertz <sequences.fasta> <match> <mismatch>  > problem.lp
  *        lp_solve -S3 problem.lp
  *
  * The alignment edge between position i of sequence s and position j of sequence t
@@ -26,11 +26,11 @@ import java.util.List;
  *
  * Fill in the four methods marked "todo". Everything else is provided.
  */
-public class ILP4MSA_YOUR_NAME {
+public class ILP4MSA_Becker_Ropertz {
 
     public static void main(String[] args) throws IOException {
         if (args.length != 3) {
-            System.err.println("Usage: java ILP4MSA_YOUR_NAME <sequences.fasta> <match> <mismatch>");
+            System.err.println("Usage: java ILP4MSA_Becker_Ropertz <sequences.fasta> <match> <mismatch>");
             System.exit(1);
         }
         var seq = readFastA(args[0]);

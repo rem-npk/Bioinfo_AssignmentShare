@@ -72,8 +72,31 @@ public class ILP4MSA_Becker_Ropertz {
     static int printObjective(PrintWriter out, String[] seq, int match, int mismatch) {
         var count = 0;
         // todo: print  max: 4 x1_1_2_1 + 1 x1_1_2_2 + ... ;  (the weight of an edge is match
-        // if the two residues are identical and mismatch otherwise; a line break between
-        // terms is allowed, a long line is not a problem either)
+        out.print("max:");
+        //first two for loops determine the sequence pairs s and t (1-2, 1-3, 2-3)
+        //third for loop -> position i in sequence s, fourth for loop -> position j in sequence t)
+        for(int s = 1; s < 3; s++){
+            for(int t = s+1; t <= 3; t++){
+                for(int i = 1; i < seq[s-1].length(); i++){
+                    for(int j = 1; j < seq[t-1].length(); j++){
+                        //checks if the pairs match and prints corresponding to it
+                        var status = match;
+                        if(seq[s-1].charAt(i)!= seq[t-1].charAt(j)){
+                            status = mismatch;
+                        }
+                        if(status == match){
+                            out.print(" " + status + " " + variable(s, i, t, j));
+                        }else{
+                            out.print(" " + "-" + status + variable(s,i,t,j));
+                        }
+                        count++;
+                    }
+                }
+            }
+
+        }
+        //println to close the line
+        out.println(" ;");
         return count;
     }
 
@@ -85,6 +108,44 @@ public class ILP4MSA_Becker_Ropertz {
     static int printTwoSequenceCycles(PrintWriter out, String[] seq) {
         var count = 0;
         // todo
+        //first two loops to determin the sequence pairs s and t
+        for(int s = 1; s <3; s++){
+            for(int t = s+1; t <=3; t++){
+                //lengths of current sequence s and t
+                var n = seq[s-1].length();
+                var m = seq[t-1].length();
+
+                //case i == j, both edges start at the same position in s
+                for(int i = 0; i < n; i++) {
+                    for (int l = 0; l < m-1; l++) {
+                        for (int k = l + 1; k < m; k++) {
+                            out.println(variable(s, i+1, t, l+1) + " + " +variable(s, i+1, t, k+1) + "<= 1;");
+                            count++;
+                        }
+                    }
+                }
+                //case l == k, both edges start at the same position in t
+                for(int l = 0; l <m; l++){
+                    for(int i = 0; i < n-1; i++){
+                        for(int j = i+1; j <n; j++){
+                            out.println(variable(s,i+1, t, l+1) + " + " + variable(s, j+1, t, l+1) + "<= 1;");
+                            count++;
+                        }
+                    }
+                }
+                //i,k and j, l cross
+                for(int i = 0; i < n-1; i++){
+                    for(int l = 0; l < m; l++){
+                        for(int j = n-1; j > i; j--){
+                            for(int k = m-1; k>l; k--){
+                                out.println(variable(s, i+1, t, k+1) + " + " + variable(s, j+1, t, l+1) + "<= 1;");
+                                count++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         return count;
     }
 
@@ -98,6 +159,12 @@ public class ILP4MSA_Becker_Ropertz {
     static int printThreeSequenceCycles(PrintWriter out, String[] seq) {
         var count = 0;
         // todo
+        //7 cases
+
+        //case1:
+        for(int i = 0; i<seq[0].length(); i++){
+
+        }
         return count;
     }
 
@@ -105,6 +172,7 @@ public class ILP4MSA_Becker_Ropertz {
     static int printBinary(PrintWriter out, String[] seq) {
         var count = 0;
         // todo
+
         return count;
     }
 

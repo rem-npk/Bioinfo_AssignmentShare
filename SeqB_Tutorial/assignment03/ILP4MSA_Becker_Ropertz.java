@@ -159,11 +159,46 @@ public class ILP4MSA_Becker_Ropertz {
     static int printThreeSequenceCycles(PrintWriter out, String[] seq) {
         var count = 0;
         // todo
-        //7 cases
+        for(int s = 1; s < 3; s++){
+            for(int t = s+1; t < 3; t++) {
 
-        //case1:
-        for(int i = 0; i<seq[0].length(); i++){
+                //7 cases
 
+                //case1 to 3:
+                for (int j = 1; j < seq[0].length(); j++) {
+
+                    for (int k = 0; k < seq[1].length(); k++) {
+                        for (int l = 0; l < seq[2].length(); l++) {
+                            for (int i = 0; i < j; i++) {
+                                out.println(variable(1, j+1, 2, k+1) + " + " + variable(2, k + 1, 3, l + 1) + " + " + variable(3, l+1, 1, i+1) + " <= 2;");
+                                out.println(variable(2,j+1,3, k+1) +  " + " + variable(3, k+1, 1, l+1) + " + " + variable(1,l+1, 2, i+1) + " <= 2;");
+                                out.println(variable(3, j+1,1, k+1) + " + " + variable(1, k+1, 2, l+1) + " + " + variable(2, l+1, 3, i+1)+ " <= 2");
+                                count += 3;
+                            }
+                        }
+                    }
+                }
+
+                //case4-6:
+                for(int i = 1; i < seq[2].length(); i++){
+                    for(int j = 0; j < seq[0].length(); j++){
+                        for(int k = 0; k < seq[1].length()-1; k++){
+                            for(int l = k+1; l < seq[1].length(); l++){
+                                for(int m = 0; m<i; m++){
+
+
+
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //case7:
+
+
+            }
         }
         return count;
     }

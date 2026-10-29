@@ -75,27 +75,19 @@ public class ILP4MSA_Becker_Ropertz {
         out.print("max:");
         //first two for loops determine the sequence pairs s and t (1-2, 1-3, 2-3)
         //third for loop -> position i in sequence s, fourth for loop -> position j in sequence t)
-        for(int s = 1; s < 3; s++){
-            for(int t = s+1; t <= 3; t++){
-                for(int i = 1; i < seq[s-1].length(); i++){
-                    for(int j = 1; j < seq[t-1].length(); j++){
-                        //checks if the pairs match and prints corresponding to it
-                        var status = match;
-                        if(seq[s-1].charAt(i)!= seq[t-1].charAt(j)){
-                            status = mismatch;
-                        }
-                        if(status == match){
-                            out.print(" " + status + " " + variable(s, i, t, j));
+        for (int s = 1; s < 3; s++)
+            for (int t = s + 1; t <= 3; t++)
+                for (int i = 1; i <= seq[s - 1].length(); i++)
+                    for (int j = 1; j <= seq[t - 1].length(); j++) {
+                        int w = 0;
+                        if(seq[s - 1].charAt(i - 1) == seq[t - 1].charAt(j - 1)){
+                          w = match;
                         }else{
-                            out.print(" " + "-" + status + variable(s,i,t,j));
+                            w = -mismatch;
                         }
+                        out.print(" " + (w >= 0 ? "+" : "-") + Math.abs(w) + " " + variable(s, i, t, j));
                         count++;
                     }
-                }
-            }
-
-        }
-        //println to close the line
         out.println(" ;");
         return count;
     }

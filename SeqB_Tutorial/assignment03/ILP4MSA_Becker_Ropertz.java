@@ -156,50 +156,88 @@ public class ILP4MSA_Becker_Ropertz {
      * the triangle. Three edges that meet in one column, with no follow edge, are not a
      * mixed cycle. Returns the number of constraints.
      */
+    //concept by hand, programming by AI, because...
     static int printThreeSequenceCycles(PrintWriter out, String[] seq) {
         var count = 0;
-        // todo
-        for(int s = 1; s < 3; s++){
-            for(int t = s+1; t < 3; t++) {
+        var lenA = seq[0].length();
+        var lenB = seq[1].length();
+        var lenC = seq[2].length();
 
-                //7 cases
-
-                //case1 to 3:
-                for (int j = 1; j < seq[0].length(); j++) {
-
-                    for (int k = 0; k < seq[1].length(); k++) {
-                        for (int l = 0; l < seq[2].length(); l++) {
-                            for (int i = 0; i < j; i++) {
-                                out.println(variable(1, j+1, 2, k+1) + " + " + variable(2, k + 1, 3, l + 1) + " + " + variable(3, l+1, 1, i+1) + " <= 2;");
-                                out.println(variable(2,j+1,3, k+1) +  " + " + variable(3, k+1, 1, l+1) + " + " + variable(1,l+1, 2, i+1) + " <= 2;");
-                                out.println(variable(3, j+1,1, k+1) + " + " + variable(1, k+1, 2, l+1) + " + " + variable(2, l+1, 3, i+1)+ " <= 2");
-                                count += 3;
-                            }
-                        }
+        // case 1:
+        for (int j = 1; j <= lenA; j++)
+            for (int i = 1; i < j; i++)
+                for (int b = 1; b <= lenB; b++)
+                    for (int c = 1; c <= lenC; c++) {
+                        out.println(variable(1, j, 2, b) + " + " + variable(2, b, 3, c) + " + " + variable(3, c, 1, i) + " <= 2;");
+                        out.println(variable(1, j, 3, c) + " + " + variable(3, c, 2, b) + " + " + variable(2, b, 1, i) + " <= 2;");
+                        count += 2;
                     }
-                }
 
-                //case4-6:
-                for(int i = 1; i < seq[2].length(); i++){
-                    for(int j = 0; j < seq[0].length(); j++){
-                        for(int k = 0; k < seq[1].length()-1; k++){
-                            for(int l = k+1; l < seq[1].length(); l++){
-                                for(int m = 0; m<i; m++){
-
-
-
-
-                                }
-                            }
-                        }
+        // case 2:
+        for (int l = 1; l <= lenB; l++)
+            for (int k = 1; k < l; k++)
+                for (int a = 1; a <= lenA; a++)
+                    for (int c = 1; c <= lenC; c++) {
+                        out.println(variable(1, a, 2, k) + " + " + variable(2, l, 3, c) + " + " + variable(3, c, 1, a) + " <= 2;");
+                        out.println(variable(1, a, 3, c) + " + " + variable(3, c, 2, k) + " + " + variable(2, l, 1, a) + " <= 2;");
+                        count += 2;
                     }
-                }
 
-                //case7:
+        // case 3:
+        for (int q = 1; q <= lenC; q++)
+            for (int p = 1; p < q; p++)
+                for (int a = 1; a <= lenA; a++)
+                    for (int b = 1; b <= lenB; b++) {
+                        out.println(variable(1, a, 2, b) + " + " + variable(2, b, 3, p) + " + " + variable(3, q, 1, a) + " <= 2;");
+                        out.println(variable(1, a, 3, p) + " + " + variable(3, q, 2, b) + " + " + variable(2, b, 1, a) + " <= 2;");
+                        count += 2;
+                    }
 
+        // case 4:
+        for (int j = 1; j <= lenA; j++)
+            for (int i = 1; i < j; i++)
+                for (int l = 1; l <= lenB; l++)
+                    for (int k = 1; k < l; k++)
+                        for (int c = 1; c <= lenC; c++) {
+                            out.println(variable(1, j, 2, k) + " + " + variable(2, l, 3, c) + " + " + variable(3, c, 1, i) + " <= 2;");
+                            out.println(variable(1, j, 3, c) + " + " + variable(3, c, 2, k) + " + " + variable(2, l, 1, i) + " <= 2;");
+                            count += 2;
+                        }
 
-            }
-        }
+        // case 5:
+        for (int j = 1; j <= lenA; j++)
+            for (int i = 1; i < j; i++)
+                for (int q = 1; q <= lenC; q++)
+                    for (int p = 1; p < q; p++)
+                        for (int b = 1; b <= lenB; b++) {
+                            out.println(variable(1, j, 2, b) + " + " + variable(2, b, 3, p) + " + " + variable(3, q, 1, i) + " <= 2;");
+                            out.println(variable(1, j, 3, p) + " + " + variable(3, q, 2, b) + " + " + variable(2, b, 1, i) + " <= 2;");
+                            count += 2;
+                        }
+
+        // case 6:
+        for (int l = 1; l <= lenB; l++)
+            for (int k = 1; k < l; k++)
+                for (int q = 1; q <= lenC; q++)
+                    for (int p = 1; p < q; p++)
+                        for (int a = 1; a <= lenA; a++) {
+                            out.println(variable(1, a, 2, k) + " + " + variable(2, l, 3, p) + " + " + variable(3, q, 1, a) + " <= 2;");
+                            out.println(variable(1, a, 3, p) + " + " + variable(3, q, 2, k) + " + " + variable(2, l, 1, a) + " <= 2;");
+                            count += 2;
+                        }
+
+        // case 7:
+        for (int j = 1; j <= lenA; j++)
+            for (int i = 1; i < j; i++)
+                for (int l = 1; l <= lenB; l++)
+                    for (int k = 1; k < l; k++)
+                        for (int q = 1; q <= lenC; q++)
+                            for (int p = 1; p < q; p++) {
+                                out.println(variable(1, j, 2, k) + " + " + variable(2, l, 3, p) + " + " + variable(3, q, 1, i) + " <= 2;");
+                                out.println(variable(1, j, 3, p) + " + " + variable(3, q, 2, k) + " + " + variable(2, l, 1, i) + " <= 2;");
+                                count += 2;
+                            }
+
         return count;
     }
 
@@ -207,7 +245,19 @@ public class ILP4MSA_Becker_Ropertz {
     static int printBinary(PrintWriter out, String[] seq) {
         var count = 0;
         // todo
-
+        out.print("bin");
+        for (int s = 1; s <= 3; s++)
+            for (int t = s + 1; t <= 3; t++)
+                for (int i = 1; i <= seq[s - 1].length(); i++)
+                    for (int j = 1; j <= seq[t - 1].length(); j++) {
+                        if(count == 0){
+                            out.print(" " + variable(s, i, t, j));
+                        }else {
+                            out.print((", ") + variable(s, i, t, j));
+                        }
+                        count++;
+                    }
+        out.println(" ;");
         return count;
     }
 

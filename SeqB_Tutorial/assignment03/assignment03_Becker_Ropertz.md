@@ -87,6 +87,11 @@ S1: GATTCA
 S2: GTTCA  
 S3: ATCAG
 
+(optimal) trace output after the following command used in Windows powershell:
+```powershell
+lp_solve -S3 long.lp | Select-String "^x\S+\s+1$"
+```
+
 | variable |     | position    | letter |
 | -------- | --- | ----------- | ------ |
 | x1_1_2_1 | 1   | S1[1]-S2[1] | G      |
@@ -104,7 +109,27 @@ S3: ATCAG
 12 edges, all matches: $12\cdot 4 = 48$
 
 extended alignment graph:
-![task1_e.png](task1_e.png)
+![task_e.jpeg|312](task1_e.jpeg)
+
+-> the trace is not optimal. The first T in sequence 3 can be matched to a different T in sequence 1 and sequence 2
+
+A second trace with weight 48 can be achieved from the trace above:
+- Remove: x1_4_3_2, x2_3_3_2
+- Add: x1_3_3_2 (T-T), x2_2_3_2 (T-T)
+- the other 10 edges stay unchanged
+
+$$
+\begin{array}{l|ccccccc|l} & G & A & T & T & C & A & - \\ 
+& G & - & T & T & C & A & - \\ 
+& - & A  & T & - & C  &A & G\\ \hline
+ \text{score}&4 & 4&12 & 4 & 12 & 12 & 0 & 48   \end{array}
+$$
+
+**2 The ILP for two sequences, by hand**
+
+
+
+
 
 
 

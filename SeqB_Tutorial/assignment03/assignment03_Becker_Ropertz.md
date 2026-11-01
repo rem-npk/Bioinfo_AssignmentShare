@@ -72,10 +72,47 @@ x2_5_3_3                        1
 x2_5_3_4                        0
 
 ```java
-java ILP4MSA_Becker_Ropertz.java  long.fasta 4 1 | Out-File -Encoding ascii problem2.lp    
+java ILP4MSA_Becker_Ropertz.java  long.fasta 4 1 | Out-File -Encoding ascii long.lp    
 ILP for GATTCA, GTTCA, ATCAG (match 4, mismatch 1)
 Variables:                       85
 Constraints, two sequences:      770
 Constraints, three sequences:    9150
 Variables declared binary:       85
 ```
+
+e) 
+Sequences in long.fasta:
+
+S1: GATTCA  
+S2: GTTCA  
+S3: ATCAG
+
+| variable |     | position    | letter |
+| -------- | --- | ----------- | ------ |
+| x1_1_2_1 | 1   | S1[1]-S2[1] | G      |
+| x1_3_2_2 | 1   | S1[3]-S2[2] | T      |
+| x1_4_2_3 | 1   | S1[4]-S2[3] | T      |
+| x1_5_2_4 | 1   | S1[5]-S2[4] | C      |
+| x1_6_2_5 | 1   | S1[6]-S2[5] | A      |
+| x1_2_3_1 | 1   | S1[2]-S3[1] | A      |
+| x1_4_3_2 | 1   | S1[4]-S3[2] | T      |
+| x1_5_3_3 | 1   | S1[5]-S3[3] | C      |
+| x1_6_3_4 | 1   | S1[6]-S3[4] | A      |
+| x2_3_3_2 | 1   | S2[3]-S3[2] | T      |
+| x2_4_3_3 | 1   | S2[4]-S3[3] | C      |
+| x2_5_3_4 | 1   | S2[5]-S3[4] | A      |
+12 edges, all matches: $12\cdot 4 = 48$
+
+extended alignment graph:
+![task1_e.png](task1_e.png)
+
+
+
+
+
+
+
+
+
+
+

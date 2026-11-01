@@ -17,6 +17,9 @@ import java.util.ArrayList;
  * Usage: java ILP4MSA_Becker_Ropertz <sequences.fasta> <match> <mismatch>  > problem.lp
  *        lp_solve -S3 problem.lp
  *
+ * problem.lp is the output for book.fasta
+ * long.lp is the output for long.fasta
+ *
  * The alignment edge between position i of sequence s and position j of sequence t
  * (s < t; sequences and positions numbered from 1) is the binary variable x<s>_<i>_<t>_<j>,
  * see variable() below. It is weighted by <match> if the two residues are identical and by

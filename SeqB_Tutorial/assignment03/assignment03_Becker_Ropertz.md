@@ -26,7 +26,7 @@ S1: GATTCA
 S2: GTTCA  
 S3: ATCAG
 
-(optimal) trace output after the following command used in Windows powershell:
+(optimal) trace output after the following command used in Windows PowerShell:
 ```powershell
 lp_solve -S3 long.lp | Select-String "^x\S+\s+1$"
 ```

@@ -77,7 +77,7 @@ public class ILP4MSA_Becker_Ropertz {
         // todo: print  max: 4 x1_1_2_1 + 1 x1_1_2_2 + ... ;  (the weight of an edge is match
         out.print("max:");
         //first two for loops determine the sequence pairs s and t (1-2, 1-3, 2-3)
-        //third for loop -> position i in sequence s, fourth for loop -> position j in sequence t)
+        //third for loop -> position i in sequence s, fourth for loop -> position j in sequence t
         for (int s = 1; s < 3; s++)
             for (int t = s + 1; t <= 3; t++)
                 for (int i = 1; i <= seq[s - 1].length(); i++)

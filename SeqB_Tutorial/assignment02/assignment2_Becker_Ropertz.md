@@ -82,6 +82,8 @@ d)
 **2 Compare with an alignment tool**
 
 a)
+>Run Clustal Omega on the twelve WW domains at the EMBL-EBI server, with default settings, download the result in FastA (Pearson) format and score it with your program (blosum62.txt, d = 4).
+
 ```java
 Progressive_BeckerRopertz score clustalo-WW12.aln-fasta blosum62.txt gap=4
 12 sequences, 23 columns
@@ -89,6 +91,9 @@ SP score: 3707
 ```
 
 b)
+>score the alignment that Clustal W produced for the same sequences and count in how many of its 23 columns your progressive alignment agrees exactly (a column agrees if it holds the same residues of the same sequences). Where do the alignments differ?
+
+score of the Clustal W alignment:
 ```java
 Progressive_BeckerRopertz score clustalw-ww12.fasta blosum62.txt gap=4
 12 sequences, 23 columns
@@ -97,7 +102,7 @@ SP score: 3729
 
 the following structure:
 ">" $\Rightarrow$ Header
-1st line below $\Rightarrow$ Clustal W 
+1st line below $\Rightarrow$ Clustal W alignment
 2nd line below $\Rightarrow$ our progressive alignment
 
 ```java
@@ -139,7 +144,9 @@ PLPDGWEQAMGEVYYINWLDPRL
 PLPDGWEQAMGEVYYINWLDPRL - match
 ```
 
-This comparison shows that columns 7 to 11, 12 to 17 and 21 to 23 have mismatches. This matches 9 columns exactly and 14 that differ overall. The differences mostly concentrated in the middle of the domain, columns 7 to 17. 
+This comparison shows that columns 7 to 11, 12 to 17 and 21 to 23 have mismatches. 
+This matches 9 columns exactly and 14 that differ overall. 
+The differences mostly concentrated in the middle of the domain, columns 7 to 17. 
 
 The alignments differ in:
 - PUB1_SCHPO_2  at columns 7 and 8
@@ -150,23 +157,33 @@ The alignments differ in:
 - O54971 at column 8 to 10
 
 c)
+>Which of the three alignments scores highest under the sum-of-pairs objective? 
+
 sp-score ClustalW: 3729
 sp-score Clustal Omega: 3707
 sp-score own alignment: 4373
 
+
+>Name two features of the tools’ methods, from Section 2.5, that make them depart from this objective, and say why the highest sum-of-pairs score is not simply the best alignment.
+
 Under the sum-of-pairs objective our own alignment scores highest with 4373.
+
 The sp-score is only a model, it depends on the chosen matrix and gap penalty. 
-It does not take the actual structure into account, which is illustrated by our own alignment having the highest sp-score despite fewer than 50% of ClustalW's 23 columns are reproduced. 
+It does not take the actual structure into account, which is illustrated by our own alignment having the highest sp-score despite fewer than 50% of ClustalW's 23 columns that are reproduced. 
+
 Two features make the tools depart from this objective. By using distances along a guide tree (e.g. by Neighbor-Joining), the most similar sequences are aligned first and then the rest is merged one after the other. With that, early decisions on gap placements are never reconsidered and the final alignment is not an optimization of the sum-of-pairs score, which means a higher scoring alignment can exist.
+
 The sum-of-pairs score also treats every pair equally. So closely related sequences dominate the scoring, the scaling defect. 
 This is countered by turning the edge weights into sequence weights and with that down-weighing closely related sequences, which results in a weighted rather than a plain sp-score.
+
 
 **3 The sum-of-pairs score**
 
 
 **4 Three sequences by dynamic programming**
 a)
-computing a score of the displayed alignment
+>computing a score of the displayed alignment
+
 scoring with blosum62
 residue against a gap -4
 two gaps 0
@@ -178,13 +195,18 @@ $$
 \text{score} & 12 & -8 & -2 & -2 & -8 & 15 & -8 & -1\end{array}
 $$
 b)
+>scoring an alignment with at least 15
 $$
 \begin{array}{l|ccccc|l} & A & G & - & D & E \\ 
 & A & S & - &G & E \\ 
 & A  & D & S & E & E \\ \hline 
 \text{score} & 12 & -1 & -8 & -1  &  15 & 17\end{array}
 $$
+
 c)
+>scoring an alignment with an optimum of 22
+with aligning the first column with only A and the last column by aligning only E
+
 $$
 \begin{array}{l|ccccc|l} & A & - & G & D & E \\ 
 & A & - & S &G & E \\ 
@@ -193,15 +215,22 @@ $$
 $$
 
 d)
-The three-dimensional matrix for these three sequences have at least $(5+1)*(4+1)*(4+1) = 150$ cells.
-An interior cells has $2^3 -1 = 7$ predecessors.
-For ten sequences of length 100 there would be $101^10 = 1.1 * 10^{20}$ cells and $2^{10} -1 = 1023$ predecessors.
+>how many cells does the three-dimensional matrix for these three sequences have, and how many predecessors does an interior cell have? Estimate both numbers for ten sequences of length 100, and conclude why exact alignment is not used in practice.
 
-Because of this exponential growth a heuristic is used practice instead of the exact alignment. 
+The three-dimensional matrix for these three sequences has at least $(5+1)*(4+1)*(4+1) = 150$ cells.
+An interior cells has $2^3 -1 = 7$ predecessors.
+
+For ten sequences of length 100 there would be $101^{10} = 1.1 * 10^{20}$ cells and $2^{10} -1 = 1023$ predecessors.
+
+Because of this *exponential growth* a heuristic is used in practice instead of the exact alignment. 
+
 
 **5 Profile alignment by hand**
 
 Exercise 2.5:
+
+>fill in the 4 × 4 matrix for the two profiles P and Q 
+traceback and write down the alignment of all four sequences
 
 a)
 two identical residues +1

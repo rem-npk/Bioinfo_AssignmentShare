@@ -105,8 +105,10 @@ public class Progressive_BeckerRopertz{
         int length_p = columns(p.rows()).length;
         int length_q = columns(q.rows()).length;
 
+        //initializing the matrix
         int[][] profile_matrix = new int[length_p+1][length_q+1];
 
+        //computing the scores for the first row and column as p-columns and q-columns against gaps
         for(int i = 1; i <= length_p; i++){
             profile_matrix[i][0] = profile_matrix[i-1][0] - residues(columns(p.rows())[i-1])* q.rows().size() * d;
         }
@@ -115,7 +117,7 @@ public class Progressive_BeckerRopertz{
             profile_matrix[0][j] = profile_matrix[0][j-1] - residues(columns(q.rows())[j-1])* p.rows().size() * d;
         }
 
-
+        //filling the matrix, by computing the diagonal, the score from the top and from the left and choosing the maximum
         for(int i = 1; i <= length_p; i++ ){
             for(int j = 1; j <= length_q; j++){
 
@@ -127,9 +129,12 @@ public class Progressive_BeckerRopertz{
 
             }
         }
+
+        //traceback done by AI
         int i = length_p;
         int j = length_q;
 
+        //two new profiles
         var newP = new ArrayList<StringBuilder>();
         for(int k = 0; k < p.rows().size(); k++){
             newP.add(new StringBuilder());
@@ -140,8 +145,12 @@ public class Progressive_BeckerRopertz{
             newQ.add(new StringBuilder());
         }
 
+        //start at bottom right cell, runs as long as i or j is not 0
+        //compares if the score in cell[i][j] matches the scoring coming from the diagonal, the top or left and
+        //correspondingly adds the char or a gap to the new alignment
         while(i > 0 || j > 0){
 
+                //diagonal, aligning p and q
                 if(i > 0 && j > 0 && profile_matrix[i][j] == profile_matrix[i-1][j-1] + crossScore(columns(p.rows())[i-1],columns(q.rows())[j-1],matrix, d)){
                     for(int n = 0; n < p.rows().size(); n++){
                         newP.get(n).append((columns(p.rows())[i-1]).charAt(n));
@@ -151,6 +160,8 @@ public class Progressive_BeckerRopertz{
                     }
                     i--;
                     j--;
+
+                //top, p against gap
                 }else if(i>0 && profile_matrix[i][j] == profile_matrix[i-1][j] - residues(columns(p.rows())[i-1]) * q.rows().size() * d){
                     for(int n = 0; n < p.rows().size(); n++){
                         newP.get(n).append((columns(p.rows())[i-1]).charAt(n));
@@ -159,6 +170,8 @@ public class Progressive_BeckerRopertz{
                         newQ.get(m).append("-");
                     }
                     i--;
+
+                    //left, q against gap
                 }else{
                     for(int n = 0; n < q.rows().size(); n++){
                         newQ.get(n).append((columns(q.rows())[j-1]).charAt(n));
@@ -171,6 +184,7 @@ public class Progressive_BeckerRopertz{
 
         }
 
+        //reversing the new Profiles and combining for the final alignment
 
         var names = new ArrayList<String>(p.names());
         names.addAll(q.names());
@@ -212,12 +226,18 @@ public class Progressive_BeckerRopertz{
         // todo: Section 2.2.1: two residues score matrix.get("" + a + b), a residue against a gap
         // scores -d, two gaps score 0
 
+        //three options:
+        //return 0 if both symbols are a gap
         if(a == '-' && b == '-'){
             return 0;
         }
+
+        // return -d if one of the symbols is a gap
         if(a == '-' || b == '-'){
             return -d;
         }
+
+        //else return the matrix score of the two residues
         return matrix.get("" + a + b);
     }
 
@@ -234,6 +254,11 @@ public class Progressive_BeckerRopertz{
     public static int spScore(List<String> rows, Map<String, Integer> matrix, int d) {
         // todo: Definition 2.2: sum over all columns and, within each column, over all pairs of
         // rows p < q, of pairScore(column.charAt(p), column.charAt(q), matrix, d)
+
+        //spScore is computed by adding up the score of every column
+        //three for-loops, first one for every column, second one to choose the first row
+        // to score against the second row which is determined by the third loop
+
         var score = 0;
         for(var i:columns(rows)){
             for(var j = 0; j < i.length(); j++){

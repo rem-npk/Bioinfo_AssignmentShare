@@ -14,6 +14,7 @@
       <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment09" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment10" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment04/FastA_files" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SeqB_Tutorial/assignment04/FastA_files/aln" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

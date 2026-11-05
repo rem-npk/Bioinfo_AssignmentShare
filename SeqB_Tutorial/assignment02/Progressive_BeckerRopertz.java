@@ -147,7 +147,7 @@ public class Progressive_BeckerRopertz{
 
         //start at bottom right cell, runs as long as i or j is not 0
         //compares if the score in cell[i][j] matches the scoring coming from the diagonal, the top or left and
-        //correspondingly adds the char or a gap to the new alignment
+        //correspondingly adds the chars or a gaps to the new alignment
         while(i > 0 || j > 0){
 
                 //diagonal, aligning p and q

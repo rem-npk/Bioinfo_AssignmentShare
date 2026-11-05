@@ -196,6 +196,7 @@ $$
 $$
 b)
 >scoring an alignment with at least 15
+
 $$
 \begin{array}{l|ccccc|l} & A & G & - & D & E \\ 
 & A & S & - &G & E \\ 

@@ -1,3 +1,6 @@
+Sequence Bioinformatics
+Assignment 3 
+Remi Becker, Nina Ropertz
 
 **1 Three sequences by integer linear programming**
 

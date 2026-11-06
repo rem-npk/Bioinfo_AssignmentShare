@@ -19,9 +19,51 @@ Remi Becker, Nina Ropertz
   The phylogenetic position of the genus *Nuphar* is so far unresolved and would affect the taxanomic status of Nymphaeaceae as a monophyletic group. Determining this would help in the effort to understand the evolutionary history of early-diverging angiosperms.
 
 #### 2: Multiple sequence alignment
-a)
+a) 
+We used MAFFT 7.526 with the following parameters <mark style="background: #FFB8EBA6;">--auto --thread 4</mark>. The programm was initiated with one call per gene in a loop over all 78 FASTA-files. The strategy is chosen depending on the size of the data. According to the log-files, L-INS-i was used for 74 genes while FFT-NS-i was used for the four genes (rpoB, rpoC2, ycf1, ycf2). These four genes have the longest alignment lengths (3234, 4311, 6860, 7721), which suggests MAFFT switched to a faster strategy for the longest alignments. The gap costs are the standard values (opening 1.53, extending 0).
 
+MAFFT is a heuristic progressive method with iterative refinement. Based on pairwise alignments a UPGMA-guide-tree is computed for L-INS-i. For FFT-NS-i, MAFFT derives the distances from shared k-mer counts instead of full pairwise alignments. The sequences are initially aligned along the tree, and subsequently the alignment is iteratively refined by means of splitting into subgroups and realigned as long as the score improves.
 
+- L-INS-i additionally uses local pairwise alignments as additional information and is consistency based with that. It is the most accurate but slowest version.
+
+- FFT-NS-i starts with a fast progressive alignment. The pairwise alignment is sped up by a Fast-Fourier-Transformation and later refined iteratively. It does not use lokal pair information but is much faster and more suitable for long sequences.
+
+Both are heuristics, because the exact multiple alignment is NP-hard. MAFFT is an independent tool, but its core is the progressive alignment of Section 2.4, with the same weakness in early errors bound into it. This problem is addressed by the iterative refinement and the consistency information in L-INS-i. In the book, MAFFT is listed under other tools
+
+commands used in Windows PowerShell:
+```powershell
+# creating folder aln for the alignment
+mkdir aln
+
+# saving the path to maaft.bat in the variable $mafft
+$mafft = "C:\path\to\mafft-7.526-win64-signed\mafft-win\mafft.bat"
+
+# alignment (run in the folder with the FASTA-files)
+Get-ChildItem *.fasta | Where-Object { $_.Name -notlike "*.aln.fasta" } | ForEach-Object {      
+>>      $g = $_.BaseName
+>>      cmd /c "`"$mafft`" --auto --thread 4 $($_.Name) > aln\$g.aln.fasta 2> aln\$g.mafft.log"
+>>    }
+
+# which strategy did MAFFT choose?
+Select-String -Path aln\*.mafft.log -Pattern "L-INS-i|FFT-NS|E-INS-i|G-INS-i" | Group-Object Line | Select Count, Name
+
+# which genes got FFT-NS-i?
+Select-String -Path aln\*.mafft.log -Pattern "FFT-NS-i" | ForEach-Object { $_.Filename -replace '\.mafft\.log$','' }
+
+# which alignments are the longest? (run in the folder that contains the table.tsv file)
+ Import-Csv table.tsv -Delimiter "`t" | Sort-Object { [int]$_.aln_length } -Descending | Select-Object -First 8
+```
+ 
+ 
+b)
+The table.tsv file contains a table with the number of sequences, the length of the alignment and the number of columns that contain a gap, for every gene. 
+
+Number of genes: 78
+shortest alignment: petL (93)
+longest alignment:  ycf2 (7721)
+Gene without gap: 27
+
+c)
 
 #### 3: visualization of multiple sequence alignments (1 point)
 

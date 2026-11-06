@@ -1,0 +1,278 @@
+IQ-TREE 3.1.4 built Sep 10 2026
+
+Input file name: C:\Users\nina\PycharmProjects\Bioinfo_AssignmentShare\SeqB_Tutorial\assignment04\FastA_files\aln\ycf1.aln.fasta
+Type of analysis: ModelFinder + tree reconstruction + ultrafast bootstrap (1000 replicates)
+Random seed number: 57360
+
+REFERENCES
+----------
+
+To cite IQ-TREE 3 please use:
+
+Thomas K.F. Wong, Nhan Ly-Trong, Huaiyan Ren, Piyumal Demotte, Hector Banos,
+Andrew J. Roger, Edward Susko, Chris Bielow, Nicola De Maio, Nick Goldman,
+Matthew W. Hahn, Mario dos Reis, Le Sy Vinh, Gavin Huttley, Robert Lanfear, Bui Quang Minh (2026)
+IQ-TREE 3: Phylogenomic Inference Software using Complex Evolutionary Models.
+Molecular Biology and Evolution, msag117.
+https://doi.org/10.1093/molbev/msag117
+
+Since you used ModelFinder please also cite: 
+
+Subha Kalyaanamoorthy, Bui Quang Minh, Thomas KF Wong, Arndt von Haeseler,
+and Lars S Jermiin (2017) ModelFinder: Fast model selection for
+accurate phylogenetic estimates. Nature Methods, 14:587–589.
+https://doi.org/10.1038/nmeth.4285
+
+Since you used ultrafast bootstrap (UFBoot) please also cite: 
+
+Diep Thi Hoang, Olga Chernomor, Arndt von Haeseler, Bui Quang Minh,
+and Le Sy Vinh (2018) UFBoot2: Improving the ultrafast bootstrap
+approximation. Mol. Biol. Evol., 35:518–522.
+https://doi.org/10.1093/molbev/msx281
+
+SEQUENCE ALIGNMENT
+------------------
+
+NOTE: Alignment sequence type is auto-detected. If in doubt, specify it via -st option.
+Input data: 17 sequences with 6860 nucleotide sites
+Number of constant sites: 4176 (= 60.8746% of all sites)
+Number of invariant (constant or ambiguous constant) sites: 4176 (= 60.8746% of all sites)
+Number of parsimony informative sites: 2086
+Number of distinct site patterns: 1163
+
+ModelFinder
+-----------
+
+Best-fit model according to BIC: TVM+F+G4
+
+List of models sorted by BIC scores: 
+
+Model                  LogL         AIC      w-AIC        AICc     w-AICc         BIC      w-BIC
+TVM+F+G4         -23723.953   47525.906 +    0.147   47526.364 +    0.148   47792.411 +     0.84
+GTR+F+G4         -23721.194   47522.388 +    0.853   47522.869 +    0.852   47795.727 +     0.16
+K3Pu+F+G4        -23814.403   47702.807 - 5.67e-040   47703.219 - 5.86e-040   47955.645 - 3.01e-036
+TIM+F+G4         -23812.267   47700.533 - 1.77e-039   47700.968 - 1.81e-039   47960.205 - 3.08e-037
+TPM3u+F+G4       -23827.989   47729.978 - 7.14e-046   47730.390 - 7.37e-046   47982.816 - 3.79e-042
+TIM3+F+G4        -23824.995   47725.989 - 5.24e-045   47726.424 - 5.36e-045   47985.661 - 9.13e-043
+TPM2u+F+G4       -23922.680   47919.360 - 5.37e-087   47919.772 - 5.54e-087   48172.198 - 2.85e-083
+TIM2+F+G4        -23920.474   47916.948 - 1.79e-086   47917.383 - 1.83e-086   48176.620 - 3.12e-084
+HKY+F+G4         -23958.825   47989.649 - 2.93e-102   47990.040 - 3.06e-102   48235.654 - 4.74e-097
+TN+F+G4          -23956.397   47986.794 - 1.22e-101   47987.206 - 1.26e-101   48239.632 - 6.48e-098
+F81+F+G4         -24244.678   48559.356 - 5.71e-226   48559.725 - 6.02e-226   48798.527 - 2.81e-219
+TVM+G4           -24304.409   48680.818 - 2.41e-252   48681.208 - 2.51e-252   48926.823 - 3.89e-247
+TVMe+G4          -24304.417   48680.833 - 2.39e-252   48681.224 - 2.49e-252   48926.838 - 3.86e-247
+TVMe+G4          -24304.417   48680.833 - 2.39e-252   48681.224 - 2.49e-252   48926.838 - 3.86e-247
+GTR+G4           -24303.147   48680.293 - 3.13e-252   48680.705 - 3.23e-252   48933.131 - 1.66e-248
+SYM+G4           -24303.147   48680.294 - 3.13e-252   48680.706 - 3.23e-252   48933.132 - 1.66e-248
+SYM+G4           -24303.147   48680.294 - 3.13e-252   48680.706 - 3.23e-252   48933.132 - 1.66e-248
+K3Pu+G4          -24329.413   48726.826 - 2.46e-262   48727.174 - 2.62e-262   48959.163 - 3.69e-254
+K3P+G4           -24329.423   48726.847 - 2.43e-262   48727.196 - 2.59e-262   48959.185 - 3.65e-254
+K3P+G4           -24329.423   48726.847 - 2.43e-262   48727.196 - 2.59e-262   48959.185 - 3.65e-254
+TIM+G4           -24328.242   48726.484 - 2.92e-262   48726.853 - 3.08e-262   48965.655 - 1.44e-255
+TIMe+G4          -24328.254   48726.509 - 2.88e-262   48726.878 - 3.04e-262   48965.680 - 1.42e-255
+TIMe+G4          -24328.254   48726.509 - 2.88e-262   48726.878 - 3.04e-262   48965.680 - 1.42e-255
+TPM3u+G4         -24362.912   48793.825 - 6.95e-277   48794.174 - 7.41e-277   49026.163 - 1.04e-268
+TPM3+G4          -24362.916   48793.832 - 6.93e-277   48794.181 - 7.39e-277   49026.170 - 1.04e-268
+TPM3+G4          -24362.916   48793.832 - 6.93e-277   48794.181 - 7.39e-277   49026.170 - 1.04e-268
+TIM3+G4          -24361.653   48793.306 - 9.01e-277   48793.675 - 9.51e-277   49032.477 - 4.44e-270
+TIM3e+G4         -24361.660   48793.321 - 8.94e-277   48793.690 - 9.44e-277   49032.492 - 4.41e-270
+TIM3e+G4         -24361.660   48793.321 - 8.94e-277   48793.690 - 9.44e-277   49032.492 - 4.41e-270
+HKY+G4           -24402.320   48870.640 - 1.45e-293   48870.969 - 1.56e-293   49096.144 - 6.64e-284
+K2P+G4           -24402.343   48870.685 - 1.42e-293   48871.014 - 1.53e-293   49096.190 - 6.49e-284
+K2P+G4           -24402.343   48870.685 - 1.42e-293   48871.014 - 1.53e-293   49096.190 - 6.49e-284
+TN+G4            -24401.129   48870.259 - 1.76e-293   48870.607 - 1.87e-293   49102.596 - 2.64e-285
+TNe+G4           -24401.138   48870.275 - 1.74e-293   48870.624 - 1.86e-293   49102.613 - 2.62e-285
+TNe+G4           -24401.138   48870.275 - 1.74e-293   48870.624 - 1.86e-293   49102.613 - 2.62e-285
+TPM2u+G4         -24401.150   48870.300 - 1.72e-293   48870.649 - 1.84e-293   49102.638 - 2.58e-285
+TPM2+G4          -24401.152   48870.304 - 1.72e-293   48870.653 - 1.83e-293   49102.642 - 2.58e-285
+TPM2+G4          -24401.152   48870.304 - 1.72e-293   48870.653 - 1.83e-293   49102.642 - 2.58e-285
+TIM2+G4          -24400.033   48870.065 - 1.93e-293   48870.434 - 2.04e-293   49109.236 - 9.54e-287
+TIM2e+G4         -24400.040   48870.080 - 1.92e-293   48870.449 - 2.03e-293   49109.251 - 9.46e-287
+TIM2e+G4         -24400.040   48870.080 - 1.92e-293   48870.449 - 2.03e-293   49109.251 - 9.46e-287
+F81+G4           -24632.193   49328.387 -        0   49328.696 -        0   49547.058 -        0
+JC+G4            -24632.280   49328.560 -        0   49328.870 -        0   49547.231 -        0
+JC+G4            -24632.280   49328.560 -        0   49328.870 -        0   49547.231 -        0
+JC+R2            -24636.210   49338.420 -        0   49338.749 -        0   49563.925 -        0
+JC+I+G4          -24636.665   49339.330 -        0   49339.659 -        0   49564.834 -        0
+JC+R3            -24630.748   49331.496 -        0   49331.865 -        0   49570.667 -        0
+JC+I+R3          -24628.436   49328.873 -        0   49329.263 -        0   49574.878 -        0
+JC+I+R2          -24637.571   49343.142 -        0   49343.491 -        0   49575.480 -        0
+JC+I             -24646.649   49357.299 -        0   49357.608 -        0   49575.969 -        0
+JC+I+R4          -24626.829   49329.659 -        0   49330.093 -        0   49589.330 -        0
+JC               -24740.644   49543.288 -        0   49543.578 -        0   49755.125 -        0
+
+AIC, w-AIC   : Akaike information criterion scores and weights.
+AICc, w-AICc : Corrected AIC scores and weights.
+BIC, w-BIC   : Bayesian information criterion scores and weights.
+
+Plus signs denote the 95% confidence sets.
+Minus signs denote significant exclusion.
+
+SUBSTITUTION PROCESS
+--------------------
+
+Model of substitution: TVM+F+G4
+
+Rate parameter R:
+
+  A-C: 1.3807
+  A-G: 2.0436
+  A-T: 0.2105
+  C-G: 1.1506
+  C-T: 2.0436
+  G-T: 1.0000
+
+State frequencies: (empirical counts from alignment)
+
+  pi(A) = 0.3768
+  pi(C) = 0.1557
+  pi(G) = 0.1806
+  pi(T) = 0.287
+
+Rate matrix Q:
+
+  A   -0.7704     0.257    0.4412    0.0722
+  C    0.6219    -1.571    0.2484     0.701
+  G    0.9204    0.2141    -1.478     0.343
+  T    0.0948    0.3803    0.2159    -0.691
+
+Model of rate heterogeneity: Gamma with 4 categories
+Gamma shape alpha: 1.492
+
+ Category  Relative_rate  Proportion
+  1         0.2241         0.25
+  2         0.5872         0.25
+  3         1.05           0.25
+  4         2.139          0.25
+Relative rates are computed as MEAN of the portion of the Gamma distribution falling in the category.
+
+MAXIMUM LIKELIHOOD TREE
+-----------------------
+
+Log-likelihood of the tree: -23723.9448 (s.e. 232.4991)
+Unconstrained log-likelihood (without tree): -32574.1711
+Number of free parameters (#branches + #model parameters): 39
+Akaike information criterion (AIC) score: 47525.8897
+Corrected Akaike information criterion (AICc) score: 47526.3472
+Bayesian information criterion (BIC) score: 47792.3947
+
+Total tree length (sum of branch lengths): 1.1811
+Sum of internal branch lengths: 0.7759 (65.6929% of tree length)
+
+WARNING: 1 near-zero internal branches (<0.0001) should be treated with caution
+         Such branches are denoted by '**' in the figure below
+
+NOTE: Tree is UNROOTED although outgroup taxon 'Cabomba_caroliniana_KT705317' is drawn at root
+Numbers in parentheses are  ultrafast bootstrap support (%)
+
++------Cabomba_caroliniana_KT705317
+|
++--Brasenia_schreberi_NC_031343
+|
+|              +--Nuphar_advena_NC_008788
+|           +--| (97)
+|           |  +--Nuphar_longifolia_MH050795
+|        +--| (93)
+|        |  |  +--Nuphar_shimadae_MH050797
+|        |  +--| (99)
+|        |     +--Nuphar_pumila_MH050796
+|     +--| (57)
+|     |  |     +--Barclaya_kunstleri_KY392762
+|     |  |  +--| (71)
+|     |  |  |  |        +**Nymphaea_alba_KU234277
+|     |  |  |  |     +--| (99)
+|     |  |  |  |     |  +**Nymphaea_alba_NC_006050
+|     |  |  |  |  +--| (88)
+|     |  |  |  |  |  +--Nymphaea_mexicana_NC_024542
+|     |  |  |  +**| (41)
+|     |  |  |     |     +--Victoria_cruziana_KY001813
+|     |  |  |     |  +--| (70)
+|     |  |  |     |  |  +--Nymphaea_jamesoniana_NC_031826
+|     |  |  |     +--| (78)
+|     |  |  |        +--Nymphaea_ampla_KU189255
+|     |  +--| (75)
+|     |     +--Barclaya_longifolia_KY284156
+|  +--| (47)
+|  |  |                                                      +--Trithuria_inconspicua_NC_020372
+|  |  +------------------------------------------------------| (100)
+|  |                                                         +--Trithuria_filamentosa_KF696682
++--| (93)
+   +--------------Euryale_ferox_KY392765
+
+Tree in newick format:
+
+(Cabomba_caroliniana_KT705317:0.0814406940,Brasenia_schreberi_NC_031343:0.0372958571,(((((Nuphar_advena_NC_008788:0.0001827122,Nuphar_longifolia_MH050795:0.0001814580)97:0.0033301014,(Nuphar_shimadae_MH050797:0.0009122220,Nuphar_pumila_MH050796:0.0003752215)99:0.0022306409)93:0.0183240992,((Barclaya_kunstleri_KY392762:0.0140445932,(((Nymphaea_alba_KU234277:0.0000010000,Nymphaea_alba_NC_006050:0.0000010000)99:0.0046126640,Nymphaea_mexicana_NC_024542:0.0054166321)88:0.0168291690,((Victoria_cruziana_KY001813:0.0145657956,Nymphaea_jamesoniana_NC_031826:0.0091391090)70:0.0012633219,Nymphaea_ampla_KU189255:0.0197602821)78:0.0028036988)41:0.0000747853)71:0.0202096716,Barclaya_longifolia_KY284156:0.0362281997)75:0.0196812798)57:0.0110983122,(Trithuria_inconspicua_NC_020372:0.0008456677,Trithuria_filamentosa_KF696682:0.0002837119)100:0.6300377034)47:0.0090496054,Euryale_ferox_KY392765:0.1799296368)93:0.0409964634);
+
+CONSENSUS TREE
+--------------
+
+Consensus tree is constructed from 1000 bootstrap trees
+Log-likelihood of consensus tree: -23723.963164
+Robinson-Foulds distance between ML tree and consensus tree: 0
+
+Branches with support >0.000000% are kept (extended consensus)
+Branch lengths are optimized by maximum likelihood on original alignment
+Numbers in parentheses are bootstrap supports (%)
+
++------Cabomba_caroliniana_KT705317
+|
++--Brasenia_schreberi_NC_031343
+|
+|              +--Nuphar_advena_NC_008788
+|           +--| (97)
+|           |  +--Nuphar_longifolia_MH050795
+|        +--| (93)
+|        |  |  +--Nuphar_shimadae_MH050797
+|        |  +--| (99)
+|        |     +--Nuphar_pumila_MH050796
+|     +--| (57)
+|     |  |     +--Barclaya_kunstleri_KY392762
+|     |  |  +--| (71)
+|     |  |  |  |        +--Nymphaea_alba_KU234277
+|     |  |  |  |     +--| (99)
+|     |  |  |  |     |  +--Nymphaea_alba_NC_006050
+|     |  |  |  |  +--| (88)
+|     |  |  |  |  |  +--Nymphaea_mexicana_NC_024542
+|     |  |  |  +--| (41)
+|     |  |  |     |     +--Victoria_cruziana_KY001813
+|     |  |  |     |  +--| (70)
+|     |  |  |     |  |  +--Nymphaea_jamesoniana_NC_031826
+|     |  |  |     +--| (78)
+|     |  |  |        +--Nymphaea_ampla_KU189255
+|     |  +--| (75)
+|     |     +--Barclaya_longifolia_KY284156
+|  +--| (47)
+|  |  |                                                      +--Trithuria_inconspicua_NC_020372
+|  |  +------------------------------------------------------| (100)
+|  |                                                         +--Trithuria_filamentosa_KF696682
++--| (93)
+   +--------------Euryale_ferox_KY392765
+
+
+Consensus tree in newick format: 
+
+(Cabomba_caroliniana_KT705317:0.0814419428,Brasenia_schreberi_NC_031343:0.0372959060,(((((Nuphar_advena_NC_008788:0.0001822033,Nuphar_longifolia_MH050795:0.0001815051)97:0.0033308223,(Nuphar_shimadae_MH050797:0.0009118724,Nuphar_pumila_MH050796:0.0003758457)99:0.0022303721)93:0.0183241408,((Barclaya_kunstleri_KY392762:0.0139648747,(((Nymphaea_alba_KU234277:0.0000021312,Nymphaea_alba_NC_006050:0.0000021312)99:0.0046128434,Nymphaea_mexicana_NC_024542:0.0054163735)88:0.0168281385,((Victoria_cruziana_KY001813:0.0145657524,Nymphaea_jamesoniana_NC_031826:0.0091389528)70:0.0012637018,Nymphaea_ampla_KU189255:0.0197601262)78:0.0028047258)41:0.0027964324)71:0.0174871410,Barclaya_longifolia_KY284156:0.0362283881)75:0.0196802332)57:0.0112714107,(Trithuria_inconspicua_NC_020372:0.0008456318,Trithuria_filamentosa_KF696682:0.0002838710)100:0.6299665148)47:0.0073275752,Euryale_ferox_KY392765:0.1800150207)93:0.0425370775);
+
+ALISIM COMMAND
+--------------
+To simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis, you can use the following command:
+
+--alisim simulated_MSA -t trees\ycf1.treefile -m "TVM{1.38073,2.04356,0.210483,1.15059}+F{0.37676,0.155683,0.180598,0.286959}+G4{1.492}" --length 6860
+
+To mimic the alignment used to produce this analysis, i.e. simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis *and* copying the same gap positions as the original alignment, you can use the following command:
+
+iqtree -s C:\Users\nina\PycharmProjects\Bioinfo_AssignmentShare\SeqB_Tutorial\assignment04\FastA_files\aln\ycf1.aln.fasta --alisim mimicked_MSA
+
+To simulate any number of alignments in either of the two commandlines above, use the --num-alignments options, for example mimic 100 alignments you would use the command line:
+
+iqtree -s C:\Users\nina\PycharmProjects\Bioinfo_AssignmentShare\SeqB_Tutorial\assignment04\FastA_files\aln\ycf1.aln.fasta --alisim mimicked_MSA --num-alignments 100
+
+For more information on using AliSim, please visit: www.iqtree.org/doc/AliSim
+
+TIME STAMP
+----------
+
+Date and time: Fri Nov 06 15:26:40 2026
+Total CPU time used: 13 seconds (0h:0m:13s)
+Total wall-clock time used: 6.9103312 seconds (0h:0m:6s)
+

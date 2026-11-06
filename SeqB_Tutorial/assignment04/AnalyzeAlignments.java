@@ -53,6 +53,24 @@ public class AnalyzeAlignments {
         }
         return counts;
     }
+    static void longestConservedRun(Map<String, String> seqs) {
+        int len = seqs.values().iterator().next().length();
+        int best = 0, bestEnd = 0, run = 0;
+        for (int i = 0; i < len; i++) {
+            char c = 0;
+            boolean same = true;
+            for (String s : seqs.values()) {
+                char x = s.charAt(i);
+                if (x == '-') { same = false; break; }
+                if (c == 0) c = x;
+                else if (x != c) { same = false; break; }
+            }
+            run = same ? run + 1 : 0;
+            if (run > best) { best = run; bestEnd = i + 1; }
+        }
+        System.out.println("Laengster Block identischer Spalten: " + best
+                + " (Spalten " + (bestEnd - best + 1) + " bis " + bestEnd + ")");
+    }
 
     public static void main(String[] args) throws IOException {
         Path dir = Paths.get(args.length > 0 ? args[0] : "aln");
@@ -129,5 +147,6 @@ public class AnalyzeAlignments {
             String name = e.getKey().length() > 50 ? e.getKey().substring(0, 50) : e.getKey();
             System.out.println(name + " | " + (s.length() - gaps) + " | " + gaps);
         }
+        longestConservedRun(read(dir.resolve("ycf1.aln.fasta")));
     }
 }

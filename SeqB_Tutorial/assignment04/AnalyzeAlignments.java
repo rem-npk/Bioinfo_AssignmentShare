@@ -5,7 +5,7 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.regex.*;
 import java.util.stream.*;
-
+// programmed by claude
 /**
  * Auswertung der MAFFT-Alignments (Aufgabe 2b und 2c).
  * Aufruf: java AnalyzeAlignments [Ordner mit *.aln.fasta]   (Standard: "aln")
@@ -64,8 +64,8 @@ public class AnalyzeAlignments {
                       .collect(Collectors.toList());
         }
         if (files.isEmpty()) {
-            System.err.println("Keine *.aln.fasta in " + dir.toAbsolutePath()
-                    + " gefunden. Working directory pruefen!");
+            System.err.println("No *.aln.fasta in " + dir.toAbsolutePath()
+                    + " found. Check working directory!");
             return;
         }
 
@@ -79,8 +79,8 @@ public class AnalyzeAlignments {
             String gene = f.getFileName().toString().replace(".aln.fasta", "");
             Map<String, String> seqs = read(f);
             if (seqs.isEmpty()) {
-                System.err.println("WARNUNG: keine Sequenzen in " + f.getFileName()
-                        + " (Datei leer oder falsche Kodierung, z.B. UTF-16) - uebersprungen");
+                System.err.println("WARNING: no sequences in " + f.getFileName()
+                        + " (file empty or wrong coding, e.g. UTF-16) - skipped");
                 continue;
             }
             int n = seqs.size();
@@ -110,17 +110,17 @@ public class AnalyzeAlignments {
             }
         }
 
-        System.out.println("Anzahl Gene: " + rows.size());
-        System.out.println("Kuerzestes Alignment: " + shortest + " (" + minLen + ")");
-        System.out.println("Laengstes Alignment:  " + longest + " (" + maxLen + ")");
-        System.out.println("Gene ohne Gap: " + noGap);
+        System.out.println("Number of genes: " + rows.size());
+        System.out.println("shortest alignment: " + shortest + " (" + minLen + ")");
+        System.out.println("longest alignment:  " + longest + " (" + maxLen + ")");
+        System.out.println("Gene without gap: " + noGap);
 
         for (String g : new String[]{"rbcL", "matK"}) {
-            System.out.println("\n" + g + " Gap-Laengen (Laenge=Anzahl): " + runs.get(g));
+            System.out.println("\n" + g + " gap-lengths (lengths=number): " + runs.get(g));
         }
 
-        // ycf1: welche Sequenzen sind auffaellig?
-        System.out.println("\nycf1 (Sequenz | Laenge ohne Gaps | Gap-Zeichen)");
+        // ycf1: which sequences are conspicuous?
+        System.out.println("\nycf1 (sequence | length without gaps | gap-symbol)");
         Map<String, String> ycf1 = read(dir.resolve("ycf1.aln.fasta"));
         for (Map.Entry<String, String> e : ycf1.entrySet()) {
             String s = e.getValue();

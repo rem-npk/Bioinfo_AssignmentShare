@@ -5,7 +5,7 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.regex.*;
 import java.util.stream.*;
-// programmed by claude
+// written by claude
 /**
  * Auswertung der MAFFT-Alignments (Aufgabe 2b und 2c).
  * Aufruf: java AnalyzeAlignments [Ordner mit *.aln.fasta]   (Standard: "aln")

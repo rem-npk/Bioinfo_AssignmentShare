@@ -165,6 +165,13 @@ Meaning of the three components:
 Jukes-Cantor is the best model six times. Different genes experience different evolutionary pressures. A highly expressed ribosomal protein gene may have uniform composition and low rate variation which means JC wins. A gene under strong selection or with high GC content will show compositional bias and rate heterogeneity leads to a more complex model (e.g. GTR+F+G4) is justified. The 6/78 split simply reflects that a subset of your genes genuinely lack the signal to support additional parameters.
 
 c)
+![img.png](rbcL_tree_from_SplitTrees.png)
+
+**Strongly supported:** _Trithuria_ (100), _Nuphar_ (97), _Barclaya_ (99), _N. alba_ (98), _Victoria + Euryale_ (91), and the group of all taxa except _Cabomba_ and _Brasenia_ (100).
+
+**Weakly supported:** the deeper nodes (52, 44) and the nodes within _Nymphaea_ (66, 67, 75).
+
+**Nymphaeaceae is not a clade:** _Trithuria_ lies between _Nuphar_ and the other Nymphaeaceae. _Nuphar_ branches off first, as sister to _Trithuria_ plus the rest, with only 52 support. The group without _Trithuria_ (_Barclaya_, _Nymphaea_, _Victoria_, _Euryale_) has only 44.
 
 #### 5: Consensus tree (1 points)
 

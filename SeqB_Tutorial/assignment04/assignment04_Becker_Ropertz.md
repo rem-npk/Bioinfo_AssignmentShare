@@ -30,7 +30,7 @@ MAFFT is a heuristic progressive method with iterative refinement. Based on pair
 
 Both are heuristics, because the exact multiple alignment is NP-hard. MAFFT is an independent tool, but its core is the progressive alignment of Section 2.4, with the same weakness in early errors bound into it. This problem is addressed by the iterative refinement and the consistency information in L-INS-i. In the book, MAFFT is listed under other tools
 
-commands used in Windows PowerShell:
+Commands used in Windows PowerShell:
 ```powershell
 # creating folder aln for the alignment
 mkdir aln
@@ -74,7 +74,7 @@ ycf1 has a gap in almost every column because there are two sequence that are ne
 
 #### 3: visualization of multiple sequence alignments 
 
-Used JalView to open the alignments of rbcL and ycf1. The names of the aligned sequences are shown next to the alignment. Depending on the chosen settings, different aspects of the alignment can be shown. The bases can be colored depending on percentage identity or nucleotide. A consensus can be shown with the consensus sequence as plain sequence and as sequence with colored bases whose size depend on the consensus. By hovering over the consensus sequence the percentage of bases aligned at the column can be viewed. Their is also an occupancy bar, that visualizes the number of gaps inserted at each column and by hovering over shows how many symbols were aligned without gaps.
+Jalview was used to open the alignments of rbcL and ycf1. The names of the aligned sequences are shown next to the alignment. Depending on the chosen settings, different aspects of the alignment can be shown. The bases can be colored depending on percentage identity or nucleotide. A consensus can be shown as consensus sequence and as sequence with colored bases whose height shows how dominant a base is in the column. A tall single letter means conserved, a stack of small letters means variable. By hovering over the consensus sequence the percentage of each base in that column can be viewed. There is also an occupancy bar, that visualizes the number of sequences that have a base in each column. A full bar means no gaps, a lower bar means gaps. Hovering over it shows how many sequences have a base there.
 
 **1. visualization of rbcL:**
 
@@ -86,10 +86,11 @@ rbcL is overall relatively conserved. Especially the region of column 1075 to 11
 
 ![img.png](ycf1_aln_visualized.png)
 
-The visualization of ycf1 shows the in task two c) determined sequences that almost only contain gaps. It also show, that in the last 62 columns at the end of the alignment only Brasenia schreberi is aligned against all gaps of the other 16 sequences. It visualizes the variability of the gene. There are overall only few conserved regions, with maximum length of three for column one to three, ATG, the start codon. This means ycf1 is hard to align and the faster FFT-NS-i used by MAFFT that sacrifices exactness for speed makes the alignment less reliable than for rbcL. 
+The visualization of ycf1 shows the in task two c) determined sequences that almost only contain gaps. It also shows, that in the last 62 columns at the end of the alignment only Brasenia schreberi is aligned against all gaps of the other 16 sequences. It visualizes the variability of the gene. There are overall only few conserved regions, with a maximum length of three for column one to three, ATG, the start codon. This means ycf1 is hard to align and the faster FFT-NS-i used by MAFFT that sacrifices exactness for speed makes the alignment less reliable than for rbcL. 
+
 #### 4: Phylogenetic trees (2 points)
 
-Windows Powershell codes by claude:
+Windows Powershell commands by Claude:
 ```powershell
 # saving the path to iptree3.exe in variable $iqtree
 $iqtree = "C:\path\to\iqtree-3.1.4-Windows\iqtree-3.1.4-Windows\bin\iqtree3.exe"
@@ -124,8 +125,9 @@ $m = Get-Content models.tsv | ForEach-Object { ($_ -split "`t")[1] }
 ```
 a)
 This is a maximum likelihood approach. IQ-Tree searches for the tree with following equation: $(T^*, \omega^*,0^*) = \arg \underset{T,\omega, 0}\max  log P(A|T,\omega, 0)$ by interleaving a topology search (NNI or SPR moves) with numerical optimization of the branch lengths (one edge at a time) and re-estimation of the model parameters. 
-Claude:
-With `-m MFP` (ModelFinder Plus), IQ-TREE first fits many substitution models to the alignment (JC, K2P, HKY, GTR and so on, each with or without +F, +I, +G) and then chooses the one with the best **Bayesian information criterion (BIC)**. BIC rewards a high likelihood but penalizes the number of free parameters, so a more complex model is only chosen if the gain in log-likelihood justifies the extra parameters (Section 4.6.3: in the primate example the better model’s six extra parameters bought more than 700 log-likelihood units). The tree is then searched under this model. `-B 1000` additionally computes 1000 ultrafast bootstrap replicates for the support values.
+
+Written by Claude:
+With `-m MFP` (ModelFinder Plus), IQ-TREE first fits many substitution models to the alignment (JC, K2P, HKY, GTR and so on, each with or without +F, +I, +G) and then chooses the one with the best Bayesian information criterion (BIC). BIC rewards a high likelihood but penalizes the number of free parameters, so a more complex model is only chosen if the gain in log-likelihood justifies the extra parameters (Section 4.6.3: in the primate example the better model’s six extra parameters bought more than 700 log-likelihood units). The tree is then searched under this model. `-B 1000` additionally computes 1000 ultrafast bootstrap replicates for the support values.
 
 
 b)
@@ -162,19 +164,21 @@ Meaning of the three components:
 
 **+I =** indicates a model that allows for a proportion of invariable sites, which means the model accounts for the fact that certain sites in the sequence alignments are evolutionarily conserved and did not undergo any substitutions.
 
-Jukes-Cantor is the best model six times. Different genes experience different evolutionary pressures. A highly expressed ribosomal protein gene may have uniform composition and low rate variation which means JC wins. A gene under strong selection or with high GC content will show compositional bias and rate heterogeneity leads to a more complex model (e.g. GTR+F+G4) is justified. The 6/78 split simply reflects that a subset of your genes genuinely lack the signal to support additional parameters.
+Jukes-Cantor is the best model six times. Different genes experience different evolutionary pressures. A highly expressed ribosomal protein gene may have uniform composition and low rate variation which means JC wins. A gene under strong selection or with high GC content will show compositional bias and rate heterogeneity leads to a more complex model (e.g. GTR+F+G4) is justified. The $6/78$ split simply reflects that a subset of the genes genuinely lack the signal to support additional parameters.
 
 c)
+Tree of rbcL with its bootstrap values computed IQ-Tree 3.1.3 and drawn with SplitsTree6:
 ![img.png](rbcL_tree_from_SplitTrees.png)
 
-**Strongly supported:** _Trithuria_ (100), _Nuphar_ (97), _Barclaya_ (99), _N. alba_ (98), _Victoria + Euryale_ (91), and the group of all taxa except _Cabomba_ and _Brasenia_ (100).
+**Strongly supported:** Trithuria (100), Nuphar (97), Barclaya (99), N. alba (98), Victoria + Euryale (91), and the group of all taxa except Cabomba and Brasenia (100).
 
-**Weakly supported:** the deeper nodes (52, 44) and the nodes within _Nymphaea_ (66, 67, 75).
+**Weakly supported:** the deeper nodes (52, 44) and the nodes within Nymphaea (66, 67, 75).
 
-**Nymphaeaceae is not a clade:** _Trithuria_ lies between _Nuphar_ and the other Nymphaeaceae. _Nuphar_ branches off first, as sister to _Trithuria_ plus the rest, with only 52 support. The group without _Trithuria_ (_Barclaya_, _Nymphaea_, _Victoria_, _Euryale_) has only 44.
+**Nymphaeaceae is not a clade:** Trithuria lies between Nuphar and the other Nymphaeaceae. Nuphar branches off first, as sister to Trithuria plus the rest, with only 52 support. The group without Trithuria (Barclaya, Nymphaea, Victoria, Euryale) has only 44.
 
 #### 5: Consensus tree (1 points)
 
+Windows PowerShell commands to compute the consensus tree with IQ-Tree 3.1.4:
 ```powershell
 # all trees in one file
 Get-Content trees\*.treefile | Set-Content all.treefile -Encoding ascii
@@ -193,12 +197,45 @@ Reading tree(s) file all.treefile ...
 27 splits found
 ```
 
+Consensus tree drawn with SplitsTree6:
 ![img.png](consensus_tree.png)
 
-Most gene trees agree on Trithuria (100%), Brasenia + Cabomba (86%), Nuphar (78%), Nymphaea + Victoria + Euryale (79%) and the two Barclaya (74%). Nymphaeaceae is not a clade of the consensus tree. Nuphar groups with Cabombaceae and Trithuria (59%), apart from Barclaya, Nymphaea, Victoria and Euryale, and the relationships within this group are unresolved.
+Most gene trees agree on Trithuria (100%), Brasenia + Cabomba (86%), the four Nuphar species (78%), Nymphaea + Victoria + Euryale (79%) and the two Barclaya (74%). A further split that occurs in 59% of the trees (46 trees) separates Barclaya + Nymphaea + Victoria + Euryale from Nuphar, Trithuria and Brasenia + Cabomba.
+
+**Nymphaeaceae is not a clade of the consensus tree.** 
+
+The split that defines it (Nuphar + Barclaya + Nymphaea + Victoria + Euryale versus Cabomba + Brasenia + Trithuria) occurs in only 23 of 78 trees (29.5%). In the consensus tree, Nuphar, Brasenia + Cabomba and Trithuria are unresolved (a multifurcation) next to the clade of Barclaya + Nymphaea + Victoria + Euryale.
+
+Placements of Nuphar, counts from the split table of the consensus network of task 6:
+
+| Placement                                    | Gene trees | %    |
+| -------------------------------------------- | ---------- | ---- |
+| Nuphar with the other Nymphaeaceae           | 23         | 29.5 |
+| Nuphar with Cabombaceae (Brasenia + Cabomba) | 21         | 26.9 |
+| Nuphar with Trithuria                        | 22         | 28.2 |
+The three splits are mutually incompatible, so each tree contains at most one of them. Together they account for 66 of 78 trees. In the other 12, Nuphar is placed differently. The counts are almost equal and none reaches a majority, so the genes do not favor any placement. This is why the consensus tree leaves Nuphar unresolved. The slight lead of the Nymphaeaceae placement (one or two trees) is not meaningful.
+
 #### 6: Consensus network (2 point)
 
+Consensus network computed for the all.treefile file with SplitsTree6.
 
+edge weights = count (the edge labels are percentages of the 78 trees)
+
+**The consensus network from the 78 trees with a threshold percentage of 33 %:**
+
+![consensus_network_split_onethird.png](consensus_network_split_onethird.png)
+At a threshold of $1/3$ the network is a tree, which means all splits above this threshold are compatible. It shows the same groups as the consensus tree (Thrithuria, Brasenia + Cabomba, Nuphar, Barclaya, Nymphaea + Victoria + Euryale) additional to the grouping N.shimadae + N.pumilla (46 %). The three placements of Nuphar do not appear, because each occurs in fewer than a third of the trees.
+
+**The consensus network from the 78 trees with a threshold percentage of 20 %:**
+
+![consensus_network_split_onefifth.png](consensus_network_split_onefifth.png)
+Six more splits appear in comparison to a threshold percentage of 33 %. Each in 21 to 24 trees. Most of the network is still tree-like (Thrithuria, Brasenia + Cabomba, Barclaya, and the Nymphaea + Victoria + Euryale part).
+
+Boxes open in two places. At the centre and within Nuphar. At the center it opend around Nuphar with three conflicting splits from task 5 (Nuphar + other Nymphaeaceae, 23 trees; Nuphar + Gabombacear, 21 trees; Nuphar + Trithuria, 22 trees) from a box where the Nuphar, Trithuria, Cabombaceae and Barclaya/Nymphaea lineages meet. Within Nuphar the box displys the conflicting splits among the four species (e.g. advena + longifolia, 51 %, versus shimadae + pumilla, 46 %, and advena + shimadae, 27 %).
+
+The change between the thresholds shows that the strong agreement (33 %) hides a conflict about the position of Nuphar, which only becomes visible when weaker splits are admitted.
+
+It can therefore be concluded, that the picture agrees wih the title of the paper. On the basis of these 78 genes, the monophyly of Nymphaeaceae is neither supported nor rejected. The split that would make them monophyletic is found in 29.5 % of the gene trees, about as ofthe as the two alternatives, so the question remains indeterminate.
 
 #### 7: Sankoff's algorithm by hand
 

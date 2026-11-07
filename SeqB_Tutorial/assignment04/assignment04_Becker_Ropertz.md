@@ -51,7 +51,7 @@ Select-String -Path aln\*.mafft.log -Pattern "L-INS-i|FFT-NS|E-INS-i|G-INS-i" | 
 Select-String -Path aln\*.mafft.log -Pattern "FFT-NS-i" | ForEach-Object { $_.Filename -replace '\.mafft\.log$','' }
 
 # which alignments are the longest? (run in the folder that contains the table.tsv file)
- Import-Csv table.tsv -Delimiter "`t" | Sort-Object { [int]$_.aln_length } -Descending | Select-Object -First 8
+Import-Csv table.tsv -Delimiter "`t" | Sort-Object { [int]$_.aln_length } -Descending | Select-Object -First 8
 ```
  
  
@@ -175,8 +175,27 @@ c)
 
 #### 5: Consensus tree (1 points)
 
+```powershell
+# all trees in one file
+Get-Content trees\*.treefile | Set-Content all.treefile -Encoding ascii
+(Get-Content all.treefile).Count     # must be 78
 
+# determining the path to $iqtree
+$iqtree = "C:\path\to\iqtree-3.1.4-Windows\bin\iqtree3.exe"
 
+#using iqtree on all trees
+& $iqtree -con -t all.treefile -minsup 0.5 --prefix consensus
+ 
+# part of the output 
+Reading tree(s) file all.treefile ...
+78 tree(s) loaded (0 rooted and 78 unrooted)
+180 split(s) discarded because frequency <= 0.500
+27 splits found
+```
+
+![img.png](consensus_tree.png)
+
+Most gene trees agree on Trithuria (100%), Brasenia + Cabomba (86%), Nuphar (78%), Nymphaea + Victoria + Euryale (79%) and the two Barclaya (74%). Nymphaeaceae is not a clade of the consensus tree. Nuphar groups with Cabombaceae and Trithuria (59%), apart from Barclaya, Nymphaea, Victoria and Euryale, and the relationships within this group are unresolved.
 #### 6: Consensus network (2 point)
 
 

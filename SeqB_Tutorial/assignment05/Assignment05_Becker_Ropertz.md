@@ -5,6 +5,14 @@ Nina Ropertz
 
 #### 1 Setting up the analysis in BEAUti
 
+**a)** P(A|T) is entered by the subset model HKY, because the substitution model defines the probability of the observed sequences along the branches of T with its transition/transversion ratio $\kappa$ and base frequencies.
+
+P(T) is entered by the tree prior of the Yule Model as itself, since it is a probability distribution on tree shapes and branching times.
+
+**b)** The Yule model assumes a pure birth process. Every lineage alive is equally likely to split at a given time, at the same constant rate independently of each other. With a new taxon only attaching to a pendant edge, one leading to a uniformly at random chosen leaf. The attachment restrictions to leaves spreads growth over the tips and produces more balanced trees. While the uniform prior lets the new taxon attach to any edge, including internal ones. This lets the tree keep growing along the same deep edges, which produces unbalanced trees. 
+
+**c)** The chain length is the number of MCMC iterations, meaning how many Metropolis-Hastings propose/accep-or-reject steps the sampler takes. With a chain length of 200 000 and logging every 1000 generations, the tree log gets one tree per 1000 steps. So 200 000 / 1000 = 200 trees. Part of that sample is later discarded as burn-in and the remaining trees approximate the posterior distribution.
+
 #### 2 Running BEAST and inspecting the run in Tracer
 
 

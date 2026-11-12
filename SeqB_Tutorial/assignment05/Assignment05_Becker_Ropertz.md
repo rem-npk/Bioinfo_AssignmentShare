@@ -15,6 +15,23 @@ P(T) is entered by the tree prior of the Yule Model as itself, since it is a pro
 
 #### 2 Running BEAST and inspecting the run in Tracer
 
+Total calculation time: 14.269 seconds
+It wrote the files 
+Writing file primates-short.log, primates-short-firsthalf.trees
+
+**a)** 
+
+| Statistic  | ESS |
+| ---------- | --- |
+| posterior  | 3   |
+| likelihood | 3   |
+| prior      | 5   |
+| TreeHeight | 18  |
+| kappa      | 4   |
+All ESS are below 200 and even 100. This means the chain has too few effectively independent samples. The estimates from it can't be trusted.
+
+**b)**
+
 
 #### 3 A longer chain
 

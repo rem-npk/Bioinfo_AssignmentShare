@@ -108,9 +108,19 @@ From the long run (kappa.firsthalf ESS = 50 at 2 million): about 8 million state
 So 10 to 20 million states need to be run, which would roughly take 6 to 12 minutes so that every ESS value is above 200.
 
 #### 4 Summarizing the sample
+**a)**
+![tree_t4.svg](tree_t4.svg)
 
+The topology is the same that NJ and maximum-likelihood found in Figure 4.5. Every clade has posterior probability 1.0 except for the clade joining Saimiri to the Catarrhini, which is 0.9456. This means the placement of Saimiri is the only uncertain point.
 
+Bootstrap values and posterior clade probabilities both measure support for a clade as the fraction of trees containing it. They differ in that bootstrap trees come from resampled alignments. Whereas the posterior is the fraction of MCMC trees and gives the probability of the clade given the data, model and prior. For Homo + Pan the posterior, 1.0, is higher than the bootstrap, 56 % under JC and 93 % under the selected model.
 
+**b)**
+![densi_tree.png](densi_tree.png)
+
+Identical to Figure 4.12, the DensiTree plot is tight at the tips and spreads strongly towards the root. The spread mostly shows uncertainty in branch lengths and node heights, especially the age of the deepest divergences. 
+
+Only a few red and green trees place Saimiri or Tarsius differently, which is consistent with the posterior of 0.9456.
 ### Part B: The suffix tree
 
 #### 5 A suffix tree by hand

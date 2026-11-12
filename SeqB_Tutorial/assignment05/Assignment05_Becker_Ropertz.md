@@ -15,26 +15,97 @@ P(T) is entered by the tree prior of the Yule Model as itself, since it is a pro
 
 #### 2 Running BEAST and inspecting the run in Tracer
 
-Total calculation time: 14.269 seconds
+Total calculation time: 8.158 seconds
 It wrote the files 
-Writing file primates-short.log, primates-short-firsthalf.trees
+Writing file primates-short.log, primates-short-firsthalf.trees and primates-short-secondhalf.trees
 
 **a)** 
 
-| Statistic  | ESS |
-| ---------- | --- |
-| posterior  | 3   |
-| likelihood | 3   |
-| prior      | 5   |
-| TreeHeight | 18  |
-| kappa      | 4   |
+| Statistic              | ESS |
+| ---------------------- | --- |
+| posterior              | 3   |
+| likelihood             | 3   |
+| prior                  | 6   |
+| Tree.firsthalf.height  | 21  |
+| Tree.secondhalf.height | 15  |
+| kappa.firsthalf        | 3   |
+| kappa.secondhalf       | 6   |
 All ESS are below 200 and even 100. This means the chain has too few effectively independent samples. The estimates from it can't be trusted.
 
 **b)**
 
+Trace of primate-short.long:
+![trace_posterior.png](trace_posterior.png)
+
+Burn-in
+![trace_posterior_burnin.png](trace_posterior_burnin.png)
+
+Claude:
+The burn-in is tracer's default burn-in and removes only the steepest part of the climb, the first 10 %, 20000 states, shown in grey. The burn-in is discarded because the chain starts from an arbitrary, poor state. Those early samples reflect the starting point, not the posterior distribution, and would bias the estimate of means and HPD intervals.
+Tracer shows log values. The likelihood is a product of many probabilities, each between 0 and 1, so it is a tiny number and its log is negative. Summed over all alignment sites this gives a large negative number (around -6000). The log posterior is the log likelihood plus the log prior, and the prior density is also small, so it is negative too. Logs are used to avoid numerical underflow.
+
+**c)** 
+
+Kapas and heights:
+
+| parameter               | mean   | 95 % HPD-intervall | ESS |
+| ----------------------- | ------ | ------------------ | --- |
+| kappa (firsthalf)       | 3.3745 | [2.0000, 4.5481]   | 2   |
+| kappa (secondhalf)      | 4.0672 | [2.0967, 4.9753]   | 6   |
+| TreeHeight (firsthalf)  | 0.2376 | [0.2144, 0.2634]   | 21  |
+| TreeHeight (secondhalf) | 0.2412 | [0.2108, 0.2695]   | 15  |
+
+HKY:
+
+| parameter                        | base | mean   | 95 % HPD         | ESS |
+| -------------------------------- | ---- | ------ | ---------------- | --- |
+| freqParameter.1<br>(first half)  | A    | 0.2520 | [0.2362, 0.2770] | 4.9 |
+| freqParameter.2<br>(first half)  | C    | 0.2591 | [0.2500, 0.2755] | 3.2 |
+| freqParameter.3<br>(first half)  | G    | 0.2291 | [0.1646, 0.2500] | 3.8 |
+| freqParameter.4<br>(first half)  | T    | 0.2598 | [0.2475, 0.2828] | 2.9 |
+| freqParameter.1<br>(second half) | A    | 0.2758 | [0.2473, 0.3412] | 3.2 |
+| freqParameter.2<br>(second half) | C    | 0.2590 | [0.2347, 0.2878] | 4.8 |
+| freqParameter.3<br>(second half) | G    | 0.1957 | [0.1230, 0.2416] | 2.5 |
+| freqParameter.4<br>(second half) | T    | 0.2695 | [0.2488, 0.2976] | 4.5 |
+Not trustworthy
+
+All ESS-values are way below 200 (only 181 samples, auto-correlational partly > 70 000). The trace is still rising, the chain is not converged. Mean and HPD-interval are therefore untrustworthy.
 
 #### 3 A longer chain
 
+
+|                        | short (200000) | long (2000000) |
+| ---------------------- | -------------- | -------------- |
+| running time           | 8.158 seconds  | 75.055 seconds |
+| **Statistic ESS**      |                |                |
+| posterior              | 3              | 174            |
+| likelihood             | 3              | 158            |
+| prior                  | 6              | 951            |
+| Tree.firsthalf.height  | 21             | 1133           |
+| Tree.secondhalf.height | 15             | 1801           |
+| kappa.firsthalf        | 3              | 50 (only one)  |
+| kappa.secondhalf       | 6              | -              |
+
+![trace_posterior_long.png](trace_posterior_long.png)
+
+
+| Estimates              | short | long  |
+| ---------------------- | ----- | ----- |
+| kappa (first half)     | 3.374 | 4.781 |
+| kappa second half      | 4.067 | -     |
+| tree.firsthalf.height  | 0.238 | 0.252 |
+| tree.secondhalf.height | 0.241 | 0.224 |
+Claude:
+ESS = N/ACT, where N is the number of samples and ACT is the auto-correlation time. With the same operators, ACT stays roughly constant, so ten times more states gives about ten times the ESS. Our table shows more than that, e.g. for posterior 3 to 174, because the short run was still climbing toward the plateau, which inflated its ACT. The long run is stationary after about 150 000 states.
+
+The estimates move little because the error of a mean is roughly $\frac{sd}{\sqrt(ESS)}$. The short-run means were already close to the posterior, just noisy. Tree heights and kappa shiftes by about one posterior sd or less (e.g. 0.238 -> 0.252, 3.37 -> 4.78). The long-run values are simply more reliable.
+
+For an ESS of > 200 a required chain length = $\frac{200}{ESS \times \text{ current length}}$
+
+From the short run (worst ESS = 2.5 for kappa.firsthalf) about 16 million states
+From the long run (kappa.firsthalf ESS = 50 at 2 million): about 8 million states
+
+So 10 to 20 million states need to be run, which would roughly take 6 to 12 minutes so that every ESS value is above 200.
 
 #### 4 Summarizing the sample
 

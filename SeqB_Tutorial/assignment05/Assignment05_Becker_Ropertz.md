@@ -184,6 +184,12 @@ a in T4 and T8
 
 - $T_9$ = $ : the walk matches 0 letters and ends at the existing root, with no split. It adds only the leaf edge $ $\rightarrow$ leaf 9
 
-b)
+**b)** 
+**gca:** The edge gca compares and matches all 3 letters. The query ends at the end of the edge, so the comparison ends at the following internal node. The leafs below are $T_2$ and $T_6$ which leaves the following output {2,6}, with no other edge matching the first letter g.
 
+**cac:** The root edge c leads to an internal node and matches the first letter. The following leaf mismatches the second letter a, against a g. The following edge matches a against a. This edge is then followed by the leaf cgca$ and matches the third letter c at the first position of the leave $T_3$ so three letters are compared, the output is {3}.
+
+**cat:** Below edge c from the root leads to an internal node and matches with the first letter. The following leaf mismatches at the second position a against g and returns $\emptyset$. The following edge matches the second letter a but mismatches the third letter t at the following leafs T3 and T7 with g and $ and returns $\emptyset$. This means there is no occurrences and since letter t only occurs at position 1 there could not be any.
+
+**gcg:** The root edge gca matches the first two letters and mismatches the third, g against a. The algorithm returns $\emptyset$ after comparing three letters.
 

@@ -16,8 +16,7 @@ P(T) is entered by the tree prior of the Yule Model as itself, since it is a pro
 #### 2 Running BEAST and inspecting the run in Tracer
 
 Total calculation time: 8.158 seconds
-It wrote the files 
-Writing file primates-short.log, primates-short-firsthalf.trees and primates-short-secondhalf.trees
+It wrote the files primates-short.log, primates-short-firsthalf.trees and primates-short-secondhalf.trees
 
 **a)** 
 
@@ -86,15 +85,15 @@ All ESS-values are way below 200 (only 181 samples, auto-correlational partly > 
 | kappa.firsthalf        | 3              | 50 (only one)  |
 | kappa.secondhalf       | 6              | -              |
 
-![trace_posterior_long.png](trace_posterior_long.png)
-
-
 | Estimates              | short | long  |
 | ---------------------- | ----- | ----- |
 | kappa (first half)     | 3.374 | 4.781 |
 | kappa second half      | 4.067 | -     |
 | tree.firsthalf.height  | 0.238 | 0.252 |
 | tree.secondhalf.height | 0.241 | 0.224 |
+
+![trace_posterior_long.png](trace_posterior_long.png)
+
 Claude:
 ESS = N/ACT, where N is the number of samples and ACT is the auto-correlation time. With the same operators, ACT stays roughly constant, so ten times more states gives about ten times the ESS. Our table shows more than that, e.g. for posterior 3 to 174, because the short run was still climbing toward the plateau, which inflated its ACT. The long run is stationary after about 150 000 states.
 
@@ -106,6 +105,7 @@ From the short run (worst ESS = 2.5 for kappa.firsthalf) about 16 million states
 From the long run (kappa.firsthalf ESS = 50 at 2 million): about 8 million states
 
 So 10 to 20 million states need to be run, which would roughly take 6 to 12 minutes so that every ESS value is above 200.
+
 
 #### 4 Summarizing the sample
 **a)**
@@ -180,7 +180,7 @@ a in T4 and T8
 
 - $T_7$ = ca$ : the walk matches 2 letter, c then a, splits the edge acgca$ below node c. It adds node ca and the leaf edge $ $\rightarrow$ leaf 8
 
-- $T_8$ = a$ : he walk matches 1 letter, a, and splits the edge acgca$. It adds node a and the leaf edge $ $\rightarrow$ leaf 8
+- $T_8$ = a$ : he walk matches 1 letter, a, and splits the edge acgca$ . It adds node a and the leaf edge $ $\rightarrow$ leaf 8
 
 - $T_9$ = $ : the walk matches 0 letters and ends at the existing root, with no split. It adds only the leaf edge $ $\rightarrow$ leaf 9
 

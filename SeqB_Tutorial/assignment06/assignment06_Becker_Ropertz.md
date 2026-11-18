@@ -14,6 +14,27 @@ Remi Becker, Nina Ropertz
 
 ## 3 The two arrays, and searching with them
 
+a)
+T = tgcacgca$ n = 9 
+
+lexicographic order: $ < # < a < c < g < t
+
+| k   | SA[k] | LCP[k] | suffix $X_{SA[k]}$ | turning node     |
+| --- | ----- | ------ | ------------------ | ---------------- |
+| 1   | 9     | -      | $                  | no previous leaf |
+| 2   | 8     | 0      | a$                 | root             |
+| 3   | 4     | 1      | acgca$             | node a           |
+| 4   | 7     | 0      | ca$                | root             |
+| 5   | 3     | 2      | cacgca$            | node ca          |
+| 6   | 5     | 1      | cgca$              | node c           |
+| 7   | 6     | 0      | gca$               | root             |
+| 8   | 2     | 3      | gcacgca$           | node gca         |
+| 9   | 1     | 0      | tgcacgca$          | root             |
+b)
+
+
+
+
 
 
 ## 4 Kasai's algorithm, and back to the tree

@@ -6,9 +6,49 @@ Remi Becker, Nina Ropertz
 
 ## 1 The naive suffix tree
 
+Output for: acatgatcatt
+
+T = acatgatcatt$
+[12..12] $ (12)
+[1..1] a
+  [2..12] catgatcatt$ (1)
+  [4..4] t
+    [8..12] catt$ (6)
+    [5..12] gatcatt$ (3)
+    [11..12] t$ (9)
+[2..4] cat
+  [5..12] gatcatt$ (2)
+  [11..12] t$ (8)
+[5..12] gatcatt$ (5)
+[4..4] t
+  [12..12] $ (11)
+  [8..12] catt$ (7)
+  [5..12] gatcatt$ (4)
+  [11..12] t$ (10)
+internal nodes: 5, leaves: 12, letters matched: 11
+
+Output for: tgcacgca
+
+T = tgcacgca$
+[9..9] $ (9)
+[4..4] a
+  [9..9] $ (8)
+  [5..9] cgca$ (4)
+[3..3] c
+  [4..4] a
+    [9..9] $ (7)
+    [5..9] cgca$ (3)
+  [6..9] gca$ (5)
+[2..4] gca
+  [9..9] $ (6)
+  [5..9] cgca$ (2)
+[1..9] tgcacgca$ (1)
+internal nodes: 5, leaves: 9, letters matched: 7
 
 ## 2 Maximal unique matches
 
+
+c) letters matched for human genome: 108998
 
 # Part B: The suffix array and the LCP array by hand
 

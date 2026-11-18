@@ -31,15 +31,62 @@ lexicographic order: $ < # < a < c < g < t
 | 8   | 2     | 3      | gcacgca$           | node gca         |
 | 9   | 1     | 0      | tgcacgca$          | root             |
 b)
+$[l,r] = [1,n]$ 
+search for left end of the block with $m = \lfloor(l+r)/2\rfloor$ searching for the first row whose suffix is not smaller than the query and continuous with $[m+1,r]$if the suffix in row m is smaller than the query, otherwise $[l,m]$ 
 
+search for right end of the block with $m = \lceil(l+r)/2\rceil$  and continue with $[l, m-1]$ if the suffix in row m is larger than the query and does not begin with it, otherwise $[m,r]$.
 
+gca, 
 
+| queries | left probes | l   | right probes | r   | positions            |
+| ------- | ----------- | --- | ------------ | --- | -------------------- |
+| gca     | 5, 7, 6     | 7   | 5, 7, 8, 9   | 8   | SA[7] = 6, SA[8] = 2 |
+| cac     | 5, 3, 4     | 5   | 5, 7, 6      | 5   | SA[5] = 3            |
+| cat     | 5,7, 6      | 6   | 5, 7, 6      | 5   | no                   |
+| gcg     | 5,7,8       | 9   | 5, 7, 8, 9   | 8   | no                   |
+Letter count for gca:
+- left search: probe 5 (cacgca$ vs gca) compares 1 letter, probe 7 (gca$ ) compares 3 and probe 6 (cgca$ ) compares 1. Overall 5 comparisons for left probes.
+- right search: probe 5 compares 1, probe 7 compares 3, probe 8 compares 3 and probe 9 compares 1. Overall 8 comparisons for right probes
 
+$\Rightarrow$ 13 letters compared in total
+
+In assignment 5 only 3 letters are compared because the edge gca is directly below the root. The binary search costs more comparisons O(m log n) compared with O(m) for the tree walk. In return, the suffix array needs much less memory, an array of n integers, with no nodes, edges or pointer. It is simpler build and implemented. 
 
 
 ## 4 Kasai's algorithm, and back to the tree
 
+a) 
+rank = (9,8,5,3,6,7,4,2,1)
 
+
+| i   | $T_i$     | row | known | suffix row above | compared        | result |
+| --- | --------- | --- | ----- | ---------------- | --------------- | ------ |
+| 1   | tgcacgca$ | 9   | 0     | gcacgca$         | t $\neq$ g      | 0      |
+| 2   | gcacgca$  | 8   | 0     | gca$             | gca, c $\neq$ $ | 3      |
+| 3   | cacgca$   | 5   | 2     | ca$              | c $\neq$ $      | 2      |
+| 4   | acgca$    | 3   | 1     | a$               | c $\neq$ $      | 1      |
+| 5   | cgca$     | 6   | 0     | cacgca$          | c, g $\neq$ a   | 1      |
+| 6   | gca$      | 7   | 0     | cgca$            | g $\neq$ c      | 0      |
+| 7   | ca$       | 4   | 0     | acgca$           | c $\neq$ a      | 0      |
+| 8   | a$        | 2   | 0     | $                | a $\neq$ $      | 0      |
+| 9   | $         | 1   | 0     | -                | none            | 0      |
+
+LCP array = $[-01021030]$
+Kasai: 1 + 4 + 1 +1 + 2 + 1 + 1 + 1 + 1 = 13 comparisons including the last unequal pair
+Comparisons from the first letter on: 1 + 4 + 3 + 2 + 2 + 1 + 1 + 1 + 1 = 16
+
+ The algorithm skips letters for $T_3$, the first two, and for $T_4$ the first one, because $T_{i-1}$ has LCP value h > 0 with the suffix $T_j$ above it, $T_{j+1}$ and $T_i$ share at least h - 1 letters.
+
+b)
+![task_4_tree.jpeg](task_4_tree.jpeg)
+
+special row at k = 6. The split edge leads to the internal node ca, not to a leaf. In rows 3, 5 and 8 the split edge always ended in a leaf.
+The LCP values around it:
+LCP$[5]$ = 2 created node at depth 2
+LCP$[6]$ = 1 is smaller than 2, so node is popped
+LCP$[6]$ = 1 is larger than 0, which is the depth of the root below it. No node of depth 1 exists, so the edge from the root to ca is split at depth 1.
+
+The  suffix tree from assignment5 is identical. It also has the internal nodes a, gca, c and ca and the same leaves.  
 
 ## 5 MUMs in the generalized suffix array
 

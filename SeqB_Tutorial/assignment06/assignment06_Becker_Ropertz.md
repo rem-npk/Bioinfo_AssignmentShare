@@ -6,50 +6,104 @@ Remi Becker, Nina Ropertz
 
 ## 1 The naive suffix tree
 
-Output for: acatgatcatt
+Output for: acatgatcatt\$
 
-T = acatgatcatt$
+T = acatgatcatt\$
 [12..12] $ (12)
 [1..1] a
-  [2..12] catgatcatt$ (1)
+  [2..12] catgatcatt\$ (1)
   [4..4] t
-    [8..12] catt$ (6)
-    [5..12] gatcatt$ (3)
-    [11..12] t$ (9)
+    [8..12] catt\$ (6)
+    [5..12] gatcatt\$ (3)
+    [11..12] t\$ (9)
 [2..4] cat
-  [5..12] gatcatt$ (2)
-  [11..12] t$ (8)
-[5..12] gatcatt$ (5)
+  [5..12] gatcatt\$ (2)
+  [11..12] t\$ (8)
+[5..12] gatcatt\$ (5)
 [4..4] t
   [12..12] $ (11)
-  [8..12] catt$ (7)
-  [5..12] gatcatt$ (4)
-  [11..12] t$ (10)
+  [8..12] catt\$ (7)
+  [5..12] gatcatt\$ (4)
+  [11..12] t\$ (10)
 internal nodes: 5, leaves: 12, letters matched: 11
 
-Output for: tgcacgca
+Output for: tgcacgca\$
 
-T = tgcacgca$
+T = tgcacgca\$
 [9..9] $ (9)
 [4..4] a
   [9..9] $ (8)
-  [5..9] cgca$ (4)
+  [5..9] cgca\$ (4)
 [3..3] c
   [4..4] a
     [9..9] $ (7)
-    [5..9] cgca$ (3)
-  [6..9] gca$ (5)
+    [5..9] cgca\$ (3)
+  [6..9] gca\$ (5)
 [2..4] gca
   [9..9] $ (6)
   [5..9] cgca$ (2)
-[1..9] tgcacgca$ (1)
+[1..9] tgcacgca\$ (1)
 internal nodes: 5, leaves: 9, letters matched: 7
 
 ## 2 Maximal unique matches
 
+a)
+Output for: java MUMs catatga acatgatcatt 2
 
-c) letters matched for human genome: 108998
+4 3 4 atga
+MUMs: 1
 
+Output for: java MUMs ggtact ctatac 1
+
+3 4 3 tac
+5 1 2 ct
+MUMs: 2
+
+b) 
+For: java MUMs NC_005089.1.fasta NC_012920.1.fasta 20
+
+There are 33 MUMs. The longest is 52 bases long and is at position 2473 in the human genome and at position 3031 in the mouse genome. The MUMs occur in the same order in the mouse genome as in the human genome. This means, the two genomes are colinear, with no inversions, translocations or duplications larger than the MUMs. A single global alignment makes sense. As descriped in Section 11.3.3, MUMmer computes the MUMs of two genomes, selects a longest chain of MUMs that occur in the same order in both genomes, and aligns the gaps between consecutive anchors by dynamic programming. This saves a lot of computations. By using anchors, smaller subproblems are solved
+
+MUMs order by occurrence in the human genome:
+
+212 791 22 GCCTAGCCACACCCCCACGGGA
+300 881 25 AATTTCGTGCCAGCCACCGCGGTCA
+474 1056 44 AGCTAAGACCCAAACTGGGATTAGATACCCCACTATGCTTAGCC
+672 1249 33 TCAGCCTATATACCGCCATCTTCAGCAAACCCT
+744 1321 21 ACGTTAGGTCAAGGTGTAGCC
+776 1353 21 AAGAAATGGGCTACATTTTCT
+901 1478 25 ACACACCGCCCGTCACCCTCCTCAA
+1208 1780 24 TAGTACCGCAAGGGAAAGATGAAA
+1603 2170 24 GTAGGCCTAAAAGCAGCCACCAAT
+1628 2195 22 AAGAAAGCGTTCAAGCTCAACA
+1924 2487 36 ACCCCGCCTGTTTACCAAAAACATCACCTCTAGCAT
+2019 2582 35 ACCGTGCAAAGGTAGCATAATCACTTGTTCCTTAA
+2151 2714 25 AAGACGAGAAGACCCTATGGAGCTT
+2361 2920 34 CAAGTTACCCTAGGGATAACAGCGCAATCCTATT
+2415 2973 37 TAGGGTTTACGACCTCGATGTTGGATCAGGACATCCC
+2473 3031 52 GGTTCGTTTGTTCAACGATTAAAGTCCTACGTGATCTGAGTTCAGACCGGAG
+2526 3084 22 AATCCAGGTCGGTTTCTATCTA
+2564 3123 22 GTACGAAAGGACAAGAGAAATA
+3294 3850 20 GCCATAATATGATTTATCTC
+3706 4263 21 AGAAATATGTCTGATAAAAGA
+3861 4418 27 TAAGCTATCGGGCCCATACCCCGAAAA
+5145 5715 20 ACTGGCTTCAATCTACTTCT
+5946 6522 26 ACTATACTACTAACAGACCGCAACCT
+6051 6627 20 GAAGTTTATATTCTTATCCT
+6102 6678 26 ACTTACTACTCCGGAAAAAAAGAACC
+6279 6855 20 GTCAAAGTATTTAGCTGACT
+6874 7450 21 AAAGGAAGGAATCGAACCCCC
+6964 7539 27 CATAACTTTGTCAAAGTTAAATTATAG
+11142 11735 20 CTATTCTGCCTAGCAAACTC
+12699 13294 23 AACCAACCACACCTAGCATTCCT
+13886 14489 32 CCCCCTAAATAAATTAAAAAAACTATTAAACC
+14952 15554 20 CCCGAATGATATTTCCTATT
+15832 16541 23 ACGTTCCCCTTAAATAAGACATC
+
+c) 
+for the human genome with n = 16 569 letters, letters matched for human genome: 108998
+
+in $a^n\$$ every suffix is a prefix of an earlier one.. so each insertion walks down all its a's before the $ mismatches. That is $(n-1) + (n-2) + \dots + 1 = \frac{n(n-1)}{2}$, which is quadratic (worst case of the naive algorithm). In the genome, a new suffix only matches an earlier one for about $log_4 n \approx 7$ letters for a random 4-letter text, so the total is only roughly $n\cdot log_4 n$. The human genome needs 108 998 matched letter, compared to 137 257 596 letters for a text of the same length of one repeated letter. So the repeated text needs about 1 260 times as many matches. 
 # Part B: The suffix array and the LCP array by hand
 
 ## 3 The two arrays, and searching with them
